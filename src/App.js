@@ -1,12 +1,15 @@
 import React from "react";
-import "./App.css";
+import { HashRouter as Router, Route } from "react-router-dom";
 import LoginScreen from "./components/Authentication/LoginScreen";
+import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <LoginScreen />
-    </div>
+    <Router>
+      <div className="App">
+        <Route exact path="/" component={LoginScreen} />
+      </div>
+    </Router>
   );
 }
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { makeStyles, IconButton } from "@material-ui/core";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import { Link } from "react-router-dom";
 import LogoDark from "../../layout/LogoDark";
+import LoginInput from "./LoginInput";
 
 const useStyles = makeStyles({
   root: {
@@ -40,15 +40,14 @@ function LoginForm(props) {
     <div id="login-form" className={classes.root}>
       <LogoDark logo={classes.logo} />
       <div id="header" className={classes.header}>
-        <IconButton className={classes.icon}>
-          <Link to="/" style={{ height: 20, width: 22, color: "inherit" }}>
+        <IconButton href="/" className={classes.icon}>
             <ArrowBackIosIcon fontSize="small" />
-          </Link>
         </IconButton>
         <div id="title" className={classes.title}>
           Login with {props.privilege} rights
         </div>
       </div>
+      <LoginInput/>
     </div>
   );
 }

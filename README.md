@@ -3,10 +3,7 @@
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/rucio/notifier/react?style=flat-square)
 ![GitHub package.json dependency version (dev dep on branch)](https://img.shields.io/github/package-json/dependency-version/rucio/notifier/dev/electron?style=flat-square)
 
-Rocinante - GUI Client for Rucio
-
-## Description
-A complete GUI desktop client for [Rucio](https://github.com/rucio/rucio).
+Rocinante - GUI Desktop Client for [Rucio](https://github.com/rucio/rucio).
 
 ## Getting Started with Development
 

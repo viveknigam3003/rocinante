@@ -1,9 +1,7 @@
 import React from "react";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import { makeStyles } from "@material-ui/core";
-import PersonIcon from "@material-ui/icons/Person";
-import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";
+import { makeStyles, Typography, Button } from "@material-ui/core";
+import LogoDark from "../../layout/LogoDark";
+import LoginCard from "./LoginCard";
 
 const useStyles = makeStyles({
   root: {
@@ -19,6 +17,7 @@ const useStyles = makeStyles({
     padding: 20,
     margin: 50,
     marginBottom: 0,
+    marginTop: 10,
   },
   subtitle: {
     fontSize: 14,
@@ -30,25 +29,21 @@ const useStyles = makeStyles({
     display: "flex",
     justifyContent: "space-around",
   },
-  card: {
-    height: 150,
-    width: 200,
-    margin: 20,
+  text: {
+    font: "Cern",
+    fontSize: 14,
+    opacity: 0.6,
+    marginTop: 50,
   },
-  cardContent: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    justifyContent: "center",
-    height: 150,
-    width: 200,
-    padding: 20,
-    fontSize: 18,
+  buttonPrimary: {
+    fontFamily: "Cern",
+    fontSize: 12,
+    fontWeight: 600,
+    padding: 5,
   },
-  cardIcon: {
-    padding: 20,
-    color: "#000000",
-    opacity: 0.8
+  logo: {
+    marginTop: 60,
+    height: 50,
   },
 });
 
@@ -57,6 +52,7 @@ function LoginScreen() {
 
   return (
     <div id="login-root" className={classes.root}>
+      <LogoDark logo={classes.logo} />
       <div id="login-title" className={classes.title}>
         Log in to Rucio
       </div>
@@ -64,17 +60,13 @@ function LoginScreen() {
         Select a privilege level to login
       </div>
       <div id="login-as" className={classes.loginOptions}>
-        <Card className={classes.card}>
-          <CardActionArea className={classes.cardContent}>
-            <SupervisorAccountIcon fontSize="large" className={classes.cardIcon} /> Admin
-          </CardActionArea>
-        </Card>
-        <Card className={classes.card}>
-          <CardActionArea className={classes.cardContent}>
-            <PersonIcon fontSize="large" className={classes.cardIcon} /> User
-          </CardActionArea>
-        </Card>
+        <LoginCard text="Admin" iconFor="admin" link="/auth/admin" />
+        <LoginCard text="User" iconFor="user" link="/auth/user" />
       </div>
+      <Typography className={classes.text}>New to Rocinante?</Typography>
+      <Button className={classes.buttonPrimary} color="primary" href="#adduser">
+        Add your rucio account
+      </Button>
     </div>
   );
 }

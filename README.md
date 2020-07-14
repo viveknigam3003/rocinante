@@ -1,7 +1,7 @@
 # rocinante
-![GitHub package.json version](https://img.shields.io/github/package-json/v/rucio/notifier?style=flat-square)
-![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/rucio/notifier/react?style=flat-square)
-![GitHub package.json dependency version (dev dep on branch)](https://img.shields.io/github/package-json/dependency-version/rucio/notifier/dev/electron?style=flat-square)
+![GitHub package.json version](https://img.shields.io/github/package-json/v/viveknigam3003/rocinante?style=flat-square)
+![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/viveknigam3003/rocinante/react?style=flat-square)
+![GitHub package.json dependency version (dev dep on branch)](https://img.shields.io/github/package-json/dependency-version/viveknigam3003/rocinante/dev/electron?style=flat-square)
 
 Rocinante - GUI Desktop Client for [Rucio](https://github.com/rucio/rucio).
 

@@ -19,7 +19,8 @@ const useStyles = makeStyles({
   },
   logo: {
     height: 36,
-    padding: 12,
+    margin: 12,
+    display: "block"
   },
   listItem: {
     padding: "12px 36px",
@@ -54,9 +55,11 @@ function Sidebar(props) {
         }}
         anchor="left"
       >
-        <Toolbar>
-          <Logo className={classes.logo} />
-        </Toolbar>
+        <React.Fragment>
+          <Toolbar>
+            <Logo className={classes.logo} />
+          </Toolbar>
+        </React.Fragment>
         <List>
           {props.values.map((text) => (
             <ListItem

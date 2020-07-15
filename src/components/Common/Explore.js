@@ -15,7 +15,7 @@ const useStyles = makeStyles({
     justifyContent: "space-between",
     alignItems: "stretch",
     padding: 2,
-    margin: 1
+    margin: 1,
   },
 });
 function Explore() {
@@ -33,7 +33,7 @@ function Explore() {
   function cdToArray(cdString) {
     return cdString.split("/").splice(1);
   }
-  
+
   return (
     <React.Fragment>
       <Breadcrumbs
@@ -47,7 +47,7 @@ function Explore() {
       </Breadcrumbs>
       <div id="explore-content" className={classes.content}>
         <FileList />
-        <DIDMeta icon="File" did="Scope 1" meta="scopeMeta"/>
+        <DIDMeta icon="File" did="Scope 1" meta="scopeMeta" />
       </div>
     </React.Fragment>
   );

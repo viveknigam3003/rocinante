@@ -36,19 +36,22 @@ const useStyles = makeStyles({
 
 function LoginForm(props) {
   const classes = useStyles();
+
   return (
-    <div id="login-form" className={classes.root}>
-      <LogoDark logo={classes.logo} />
-      <div id="header" className={classes.header}>
-        <IconButton href="/" className={classes.icon}>
+    <React.Fragment>
+      <div id="login-form" className={classes.root}>
+        <LogoDark logo={classes.logo} />
+        <div id="header" className={classes.header}>
+          <IconButton href="/" className={classes.icon}>
             <ArrowBackIosIcon fontSize="small" />
-        </IconButton>
-        <div id="title" className={classes.title}>
-          Login with {props.privilege} rights
+          </IconButton>
+          <div id="title" className={classes.title}>
+            Login with {props.privilege} rights
+          </div>
         </div>
+        <LoginInput />
       </div>
-      <LoginInput/>
-    </div>
+    </React.Fragment>
   );
 }
 

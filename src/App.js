@@ -4,6 +4,7 @@ import LoginScreen from "./components/Authentication/LoginScreen";
 import "./App.css";
 import LoginForm from "./components/Authentication/LoginForm";
 import AddAccount from "./components/Authentication/AddAccount";
+import Landing from "./components/Common/Landing";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           component={() => <LoginForm privilege="user" />}
         />
         <Route path="/adduser" component={() => <AddAccount />} />
+        <Route path="/app" component={Landing}/>
       </div>
     </Router>
   );

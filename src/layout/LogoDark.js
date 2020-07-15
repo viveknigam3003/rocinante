@@ -16,7 +16,7 @@ const useStyles = makeStyles({
   
 function LogoDark(props) {
     const classes = useStyles();
-    return <img src={darkLogoImage} alt="logo_dark" className={props.logo || classes.logo} />;
+    return <img src={darkLogoImage} alt="logo_dark" className={props.className || classes.logo} />;
 }
 
 export default LogoDark

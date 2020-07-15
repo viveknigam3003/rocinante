@@ -9,8 +9,14 @@ function App() {
     <Router>
       <div className="App">
         <Route exact path="/" component={LoginScreen} />
-        <Route path="/auth/admin" component={() => <LoginForm privilege="admin"/>}/>
-        <Route path="/auth/user" component={() => <LoginForm privilege="user"/>}/>
+        <Route
+          path="/auth/admin"
+          component={() => <LoginForm privilege="admin" />}
+        />
+        <Route
+          path="/auth/user"
+          component={() => <LoginForm privilege="user" />}
+        />
       </div>
     </Router>
   );

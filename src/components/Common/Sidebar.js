@@ -2,6 +2,7 @@ import React from "react";
 import Drawer from "@material-ui/core/Drawer";
 import { makeStyles, Toolbar, List, ListItem } from "@material-ui/core";
 import Logo from "../../layout/Logo";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   drawer: {
@@ -38,7 +39,10 @@ const useStyles = makeStyles({
  */
 function Sidebar(props) {
   const classes = useStyles({ drawerWidth: props.width });
-  const values = ["Explore", "Storage", "Rules", "Monitoring"];
+
+  const AdapterLink = React.forwardRef((props, ref) => (
+    <Link innerRef={ref} {...props} />
+  ));
 
   return (
     <React.Fragment>
@@ -54,8 +58,14 @@ function Sidebar(props) {
           <Logo className={classes.logo} />
         </Toolbar>
         <List>
-          {values.map((text) => (
-            <ListItem className={classes.listItem} button key={text}>
+          {props.values.map((text) => (
+            <ListItem
+              className={classes.listItem}
+              button
+              key={text}
+              component={AdapterLink}
+              to={`/app/${text.toLowerCase()}`}
+            >
               {text}
             </ListItem>
           ))}

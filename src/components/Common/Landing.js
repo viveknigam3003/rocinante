@@ -3,7 +3,7 @@ import { AppBar, Toolbar, makeStyles } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import ToolbarOptions from "./ToolbarOptions";
 import Sidebar from "./Sidebar";
-import ContentLayout from "./ContentLayout";
+import RenderLayout from "./RenderLayout";
 
 const useStyles = makeStyles({
   Toolbar: {
@@ -18,8 +18,11 @@ const useStyles = makeStyles({
   },
 });
 
-function Landing() {
+function Landing(props) {
   const classes = useStyles();
+  const view = props.view; 
+  const page = props.page
+
   return (
     <React.Fragment>
       <AppBar color="transparent" elevation={0} position="static">
@@ -27,8 +30,8 @@ function Landing() {
           <ToolbarOptions />
         </Toolbar>
       </AppBar>
-      <Sidebar width={240}/>
-      <ContentLayout drawerWidth={240}/>
+      {view === "U" ? <Sidebar width={240} values={["Explore", "Storage", "Rules", "Monitoring"]}/> : null}
+      <RenderLayout drawerWidth={240} page={page}/>
     </React.Fragment>
   );
 }

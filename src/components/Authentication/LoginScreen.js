@@ -52,7 +52,7 @@ function LoginScreen() {
 
   return (
     <div id="login-root" className={classes.root}>
-      <LogoDark logo={classes.logo} />
+      <LogoDark className={classes.logo} />
       <div id="login-title" className={classes.title}>
         Log in to Rucio
       </div>

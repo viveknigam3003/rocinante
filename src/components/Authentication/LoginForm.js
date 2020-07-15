@@ -40,7 +40,7 @@ function LoginForm(props) {
   return (
     <React.Fragment>
       <div id="login-form" className={classes.root}>
-        <LogoDark logo={classes.logo} />
+        <LogoDark className={classes.logo} />
         <div id="header" className={classes.header}>
           <IconButton href="/" className={classes.icon}>
             <ArrowBackIosIcon fontSize="small" />

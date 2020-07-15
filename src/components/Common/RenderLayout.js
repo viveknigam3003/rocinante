@@ -7,7 +7,7 @@ const useStyles = makeStyles((theme) => ({
   content: {
     width: (props) => `calc(100% - ${props.drawerWidth}px)`,
     marginLeft: (props) => props.drawerWidth,
-    height: "80vh",
+    height: `calc(100% - 96px)`,
     flexGrow: 1,
     padding: theme.spacing(3),
     display: "flex",

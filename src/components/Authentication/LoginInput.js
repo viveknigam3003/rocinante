@@ -42,7 +42,7 @@ function LoginInput() {
   }
 
   if (loggedin) {
-    return <Redirect to="/app" />;
+    return <Redirect to="/app/explore" />;
   }
 
   return (

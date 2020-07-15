@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 import darkLogoImage from "./ruciosq_dark.png";
-import { makeStyles } from '@material-ui/core';
+import { makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   logo: {
@@ -11,12 +11,18 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "flex-start",
-  } 
-})
-  
+  },
+});
+
 function LogoDark(props) {
-    const classes = useStyles();
-    return <img src={darkLogoImage} alt="logo_dark" className={props.className || classes.logo} />;
+  const classes = useStyles();
+  return (
+    <img
+      src={darkLogoImage}
+      alt="logo_dark"
+      className={props.className || classes.logo}
+    />
+  );
 }
 
-export default LogoDark
+export default LogoDark;

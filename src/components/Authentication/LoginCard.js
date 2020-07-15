@@ -29,12 +29,10 @@ const useStyles = makeStyles({
   cardIconEnter: {
     padding: 20,
     color: "#3e55ab",
-    opacity: 0.8,
   },
   cardIcon: {
     padding: 20,
     color: "#000000",
-    opacity: 0.8,
   },
 });
 

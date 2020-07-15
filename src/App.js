@@ -7,6 +7,8 @@ import AddAccount from "./components/Authentication/AddAccount";
 import Landing from "./components/Common/Landing";
 
 function App() {
+  const viewContext = "U"; //U: User View, A: Admin View
+
   return (
     <Router>
       <div className="App">
@@ -20,7 +22,14 @@ function App() {
           component={() => <LoginForm privilege="user" />}
         />
         <Route path="/adduser" component={() => <AddAccount />} />
-        <Route path="/app" component={Landing}/>
+        <Route
+          path="/app/explore"
+          component={() => <Landing page="Explore" view={viewContext} />}
+        />
+        <Route
+          path="/app/storage"
+          component={() => <Landing page="Storage" view={viewContext} />}
+        />
       </div>
     </Router>
   );

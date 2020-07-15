@@ -6,7 +6,7 @@ import Typography from "@material-ui/core/Typography";
 import LogoDark from "../../../layout/LogoDark";
 
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+import { Button, ButtonGroup } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -122,6 +122,18 @@ function UserDetails(props) {
             onChange={(e) => props.setPassword(e.target.value)}
           />
         </form>
+        <ButtonGroup>
+
+        <Button
+          className={classes.submit}
+          variant="contained"
+          color="primary"
+          href="/"
+        >
+          <Typography className={classes.buttonSecondary}>
+            Cancel
+          </Typography>
+        </Button>
         <Button
           className={classes.submit}
           variant="contained"
@@ -134,6 +146,7 @@ function UserDetails(props) {
             Server Details
           </Typography>
         </Button>
+        </ButtonGroup>
       </div>
     </Container>
   );

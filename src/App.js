@@ -3,6 +3,7 @@ import { HashRouter as Router, Route } from "react-router-dom";
 import LoginScreen from "./components/Authentication/LoginScreen";
 import "./App.css";
 import LoginForm from "./components/Authentication/LoginForm";
+import AddAccount from "./components/Authentication/AddAccount";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           path="/auth/user"
           component={() => <LoginForm privilege="user" />}
         />
+        <Route path="/adduser" component={() => <AddAccount />} />
       </div>
     </Router>
   );

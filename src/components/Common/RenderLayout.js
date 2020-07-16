@@ -32,19 +32,21 @@ function RenderLayout(props) {
       case "Explore":
         return <Explore />;
       case "Storage":
-        return <div/>
+        return <div />;
       default:
         return <Redirect to="/" />;
     }
   }
 
   return (
-    <div className={classes.content}>
-      <div id="page-title" className={classes.pageTitle}>
-        {props.page}
+    <React.Fragment>
+      <div className={classes.content}>
+        <div id="page-title" className={classes.pageTitle}>
+          {props.page}
+        </div>
+        {renderSwitch(props.page)}
       </div>
-      {renderSwitch(props.page)}
-    </div>
+    </React.Fragment>
   );
 }
 

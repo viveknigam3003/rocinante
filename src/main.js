@@ -22,7 +22,7 @@ const createWindow = () => {
     },
   });
 
-  window.loadURL("http://localhost:3001");
+  window.loadURL("http://localhost:3005");
 };
 
 ipcMain.on("show-window", () => {

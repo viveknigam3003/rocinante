@@ -3,6 +3,7 @@ import Drawer from "@material-ui/core/Drawer";
 import { makeStyles, Toolbar, List, ListItem } from "@material-ui/core";
 import Logo from "../../layout/Logo";
 import { Link } from "react-router-dom";
+import SidebarIcons from "./SidebarIcons";
 
 const useStyles = makeStyles({
   drawer: {
@@ -20,9 +21,12 @@ const useStyles = makeStyles({
   logo: {
     height: 36,
     margin: 12,
-    display: "block"
+    display: "block",
   },
   listItem: {
+    display: "flex",
+    justifyContent: "start",
+    alignItems: "center",
     padding: "12px 36px",
     lineHeight: 1.5,
     letterSpacing: "0.001em",
@@ -69,6 +73,7 @@ function Sidebar(props) {
               component={AdapterLink}
               to={`/app/${text.toLowerCase()}`}
             >
+              <SidebarIcons icon={text} />
               {text}
             </ListItem>
           ))}

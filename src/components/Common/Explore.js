@@ -18,6 +18,20 @@ const useStyles = makeStyles({
     margin: 1,
   },
 });
+
+const didMetadata = {
+  account: "vivek",
+  name: "newDataset",
+  created_at: "2020-04-13 15:39:02",
+  did_type: "DATASET",
+  scope: " newScope",
+  updated_at: " 2020-04-13 15:39:02",
+  availability: "AVAILABLE",
+  monotonic: "false",
+  bytes: "null",
+  is_open: "true",
+};
+
 function Explore() {
   const classes = useStyles();
   const cd = "/home/vivek/Desktop/GSoC_2020/rocinante";
@@ -47,7 +61,11 @@ function Explore() {
       </Breadcrumbs>
       <div id="explore-content" className={classes.content}>
         <FileList />
-        <DIDMeta icon="File" did="Scope 1" meta="scopeMeta" />
+        <DIDMeta
+          icon={didMetadata.did_type}
+          did={didMetadata.name}
+          meta={didMetadata}
+        />
       </div>
     </React.Fragment>
   );

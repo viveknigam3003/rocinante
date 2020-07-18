@@ -14,6 +14,7 @@ const useStyles = makeStyles({
     padding: 12,
     float: "right",
     minWidth: "20%",
+    maxHeight: "80%"
   },
   title: {
     fontFamily: "Cern",

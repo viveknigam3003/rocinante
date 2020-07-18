@@ -29,9 +29,10 @@ const columns = [
   { id: "type", label: "Type", minWidth: 100 },
 ];
 
+//TODO: Refactor Code to support actual metadata
 function FileList() {
   const classes = useStyles();
-  const entrypoint = "/home/vivek/Desktop/";
+  const entrypoint = "/ruciofs";
   const [cd, setCd] = useState(entrypoint);
   const [rows, setRows] = useState([]);
   let key = 0;

@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 function getFiles(folder) {
-  let list = [];
+  let list = [{name: "."}, {name: ".."}];
   try {
     fs.readdirSync(folder).forEach((file) => {
       let statsObj = fs.statSync(folder + "/" + file);

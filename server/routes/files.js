@@ -4,7 +4,11 @@ const router = express.Router();
 
 router.post("/getfiles", (req, res) => {
   const list = getFiles(req.body.folder);
-  res.json({ls: list}).status(200);
+  if (list === null){
+    res.sendStatus(404);
+    return;
+  }
+  res.send(list).status(200);
 });
 
 module.exports = router;

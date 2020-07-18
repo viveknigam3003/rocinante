@@ -2,10 +2,19 @@ const fs = require("fs");
 
 function getFiles(folder) {
   let list = [];
-  fs.readdirSync(folder).forEach((file) => {
-    list.push(file);
-  });
-  console.log(`[INFO] Files retrieved from ${folder}`)
+  try {
+    fs.readdirSync(folder).forEach((file) => {
+      let statsObj = fs.statSync(folder + "/" + file);
+      statsObj.isFile()
+        ? list.push({ name: file, type: "FILE" })
+        : list.push({ name: file, type: "FOLDER" });
+    });
+  } catch {
+    console.log(`[INFO] Folder not found at ${folder}`);
+    return null;
+  }
+  console.log(`[INFO] Files retrieved from ${folder}`);
+
   return list;
 }
 

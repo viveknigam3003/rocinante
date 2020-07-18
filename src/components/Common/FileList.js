@@ -10,6 +10,7 @@ import {
   TableBody,
 } from "@material-ui/core";
 import { lsFolder } from "../Utils/Files";
+import FileIcons from "./FileIcons";
 
 const useStyles = makeStyles({
   root: {
@@ -25,12 +26,12 @@ const useStyles = makeStyles({
 
 const columns = [
   { id: "name", label: "Name", minWidth: 100 },
-  { id: "type", label: "DID\u00a0Type", minWidth: 100 },
+  { id: "type", label: "Type", minWidth: 100 },
 ];
 
 function FileList() {
   const classes = useStyles();
-  const entrypoint = "/home/vivek/Desktop";
+  const entrypoint = "/home/vivek/Desktop/";
   const [cd, setCd] = useState(entrypoint);
   const [rows, setRows] = useState([]);
   let key = 0;
@@ -75,7 +76,10 @@ function FileList() {
                         align={column.align}
                         onClick={() => renderFileList(row.name)}
                       >
-                        {value}
+                        <div style={{ display: "flex", alignItems: "center" }}>
+                          <FileIcons type={row.type} rowValue={value}/>
+                          {value}
+                        </div>
                       </TableCell>
                     );
                   })}

@@ -5,6 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 import LoginButton from "./LoginButton";
 import { Redirect } from "react-router-dom";
+import { saveCurrentUser } from "../Utils/User";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,6 +40,7 @@ function LoginInput() {
     console.log("Submit Handled");
     setLoading(true)
     setLoggedin(true)
+    saveCurrentUser(account, username, password);
   }
 
   if (loggedin) {

@@ -8,11 +8,11 @@ const cookies = new Cookies();
  * {servername: String, token: String}
  */
 export function getAvailableTokens() {
-  var tokens = [];
+  let tokens = [];
   const serverlist = getAllServersByNames();
-  for (var i = 0; i < serverlist.length; i++) {
+  for (let i = 0; i < serverlist.length; i++) {
     if (cookies.get(serverlist[i]) !== undefined) {
-      var tokenDict = {
+      let tokenDict = {
         servername: serverlist[i],
         token: cookies.get(serverlist[i]),
       };
@@ -51,7 +51,17 @@ export async function refreshToken(payload) {
 
 export function printAvailableTokens() {
   const tokens = getAvailableTokens();
-  for (var i = 0; i < tokens.length; i++) {
+  for (let i = 0; i < tokens.length; i++) {
     console.log(tokens[i].token);
+  }
+}
+
+/**
+ * Purges all user tokens from the memory.
+ */
+export function purgeAllTokens() {
+  const tokenKeys = getAllServersByNames();
+  for (let i = 0; i < tokenKeys.length; i++) {
+    cookies.remove(tokenKeys[i], { path: "/" });
   }
 }

@@ -11,17 +11,17 @@ const cookies = new Cookies();
  * @param {String} username
  * @param {String} password
  */
-export function saveUser(account, username, password) {
+export function saveCurrentUser(account, username, password) {
   localStorage.setItem("CURR_ACCOUNT", account);
   localStorage.setItem("CURR_USERNAME", username);
   localStorage.setItem("CURR_PASSWORD", password);
-  localStorage.setItem("APP_USER", "Rucio User")
+  localStorage.setItem("APP_USER", "Rucio User");
 }
 
 /**
  * Removes the user details from local storage.
  */
-export function purgeUser() {
+export function purgeCurrentUser() {
   localStorage.removeItem("CURR_ACCOUNT");
   localStorage.removeItem("CURR_USERNAME");
   localStorage.removeItem("CURR_PASSWORD");
@@ -54,46 +54,39 @@ export function authTokensPresent() {
   return authTokens.length > 0;
 }
 
-/**
- * Purges all user tokens from the memory.
- */
-export function purgeAllTokens() {
-  const tokenKeys = getAllServersByNames();
-  for (var i = 0; i < tokenKeys.length; i++) {
-    cookies.remove(tokenKeys[i], { path: "/" });
-  }
-}
 
-/**
- * Adds a new account to Accounts in the localstorage.
- *
- * @param {String} account New Rucio Account
- * @param {String} username Rucio Username
- * @param {String} password Rucio Password
- */
-export function addNewAccount(account, username, password) {
-  const newAccount = {
+export function addNewAccountConfig(
+  account,
+  username,
+  password,
+  servername,
+  hostserver,
+  authserver,
+  certlocation,
+  mountpath
+) {
+  const newAccountConfig = {
     account: account,
     username: username,
     password: password,
+    server: {
+      name: servername,
+      host: hostserver,
+      auth: authserver,
+    },
+    certlocation: certlocation,
+    mountpath: mountpath,
   };
-  try {
-    var Accounts = JSON.parse(localStorage.getItem("Accounts"));
-    Accounts.push(newAccount);
-    localStorage.setItem("Accounts", JSON.stringify(Accounts));
-  } catch {
-    Accounts = [];
-    Accounts.push(newAccount);
-    localStorage.setItem("Accounts", JSON.stringify(Accounts));
-  }
-}
 
-/**
- * Saves the Cert location in the storage as 'usercert'
- * @param {String} certlocation
- */
-export function saveCertLocation(certlocation) {
-  localStorage.setItem("usercert", certlocation);
+  try {
+    let accountConfigs = JSON.parse(localStorage.getItem("Accounts"));
+    accountConfigs.push(newAccountConfig);
+    localStorage.setItem("Accounts", JSON.stringify(accountConfigs));
+  } catch {
+    let accountConfigs = [];
+    accountConfigs.push(newAccountConfig);
+    localStorage.setItem("Accounts", JSON.stringify(accountConfigs));
+  }
 }
 
 /**

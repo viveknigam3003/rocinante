@@ -63,7 +63,7 @@ export function addNewAccountConfig(
   hostserver,
   authserver,
   certlocation,
-  mountpath
+  mountppoint
 ) {
   const newAccountConfig = {
     account: account,
@@ -75,7 +75,7 @@ export function addNewAccountConfig(
       auth: authserver,
     },
     certlocation: certlocation,
-    mountpath: mountpath,
+    mountpoint: mountppoint,
   };
 
   try {

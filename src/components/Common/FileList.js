@@ -9,7 +9,7 @@ import {
   TableCell,
   TableBody,
 } from "@material-ui/core";
-import { lsFolder } from "../Utils/Files";
+import { lsFolder, currentUserMountPoint } from "../Utils/Files";
 import FileIcons from "./FileIcons";
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -25,6 +25,7 @@ const useStyles = makeStyles({
   },
 });
 
+//Add Objects to this array to add columns to FileList.
 const columns = [
   { id: "name", label: "Name", minWidth: 100 },
   { id: "type", label: "Type", minWidth: 100 },
@@ -36,11 +37,12 @@ function FileList() {
   const dispatch = useDispatch();
   const cd = useSelector((state) => state)
   const [rows, setRows] = useState([]);
+  const entrypoint = currentUserMountPoint();
   let key = 0;
 
   React.useEffect(() => {
-    lsFolder("/home/vivek/Desktop").then((res) => setRows(res.data));
-  }, []);
+    lsFolder(entrypoint).then((res) => setRows(res.data));
+  }, [entrypoint]);
 
   /**
    * Renders the list of files/folders in the current directory by altering the state.

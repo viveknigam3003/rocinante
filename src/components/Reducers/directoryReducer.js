@@ -1,4 +1,6 @@
-const currentDirectory = "/home/vivek/Desktop"
+import { currentUserMountPoint } from "../Utils/Files"
+
+const currentDirectory = currentUserMountPoint()
 
 function directoryReducer(state = currentDirectory, action) {
     switch(action.type){

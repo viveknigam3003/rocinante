@@ -11,6 +11,7 @@ import {
 } from "@material-ui/core";
 import { lsFolder } from "../Utils/Files";
 import FileIcons from "./FileIcons";
+import {useSelector, useDispatch} from 'react-redux';
 
 const useStyles = makeStyles({
   root: {
@@ -32,19 +33,23 @@ const columns = [
 //TODO: Refactor Code to support actual metadata
 function FileList() {
   const classes = useStyles();
-  const entrypoint = "/ruciofs";
-  const [cd, setCd] = useState(entrypoint);
+  const dispatch = useDispatch();
+  const cd = useSelector((state) => state)
   const [rows, setRows] = useState([]);
   let key = 0;
 
   React.useEffect(() => {
-    lsFolder(entrypoint).then((res) => setRows(res.data));
-  }, [entrypoint]);
+    lsFolder("/home/vivek/Desktop").then((res) => setRows(res.data));
+  }, []);
 
+  /**
+   * Renders the list of files/folders in the current directory by altering the state.
+   * @param {String} folder folder name in the current directory
+   */
   function renderFileList(folder) {
-    return lsFolder(cd + "/" + folder).then((res) => {
+    return lsFolder(cd.directory + "/" + folder).then((res) => {
       setRows(res.data);
-      setCd(cd + "/" + folder);
+      dispatch({type: "CD", folder: folder});
     });
   }
 

@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function CertDetails(props) {
+function OtherDetails(props) {
   const classes = useStyles();
 
   function submit(e) {
@@ -96,6 +96,17 @@ function CertDetails(props) {
             defaultValue={props.certlocation}
             onChange={(e) => props.setCertlocation(e.target.value)}
           />
+          <TextField
+            variant="outlined"
+            margin="normal"
+            fullWidth
+            id="mountpoint"
+            label="FUSE Mountpoint"
+            name="mountpoint"
+            autoFocus
+            defaultValue={props.mountpoint}
+            onChange={(e) => props.setMountpoint(e.target.value)}
+          />
         </form>
         <ButtonGroup>
           <Button
@@ -124,4 +135,4 @@ function CertDetails(props) {
   );
 }
 
-export default CertDetails;
+export default OtherDetails;

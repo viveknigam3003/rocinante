@@ -1,11 +1,9 @@
 import React, { useState } from "react";
 import UserDetails from "./AddAccountPages/UserDetails";
 import ServerDetails from "./AddAccountPages/ServerDetails";
-import CertDetails from "./AddAccountPages/CertDetails";
+import OtherDetails from "./AddAccountPages/OtherDetails";
 import Success from "./AddAccountPages/Success";
-import { addServer } from "../Utils/Servers";
-import { addNewAccount, saveCertLocation } from "../Utils/User";
-import { createNotificationStore } from "../Utils/Notifications";
+import { addNewAccountConfig } from "../Utils/User";
 
 function AddAccount() {
   const [step, setStep] = useState(1);
@@ -16,6 +14,7 @@ function AddAccount() {
   const [hostIP, setHostIP] = useState("");
   const [authIP, setAuthIP] = useState("");
   const [certlocation, setCertlocation] = useState("");
+  const [mountpoint, setMountpoint] = useState("");
 
   function nextStep() {
     const newStep = step;
@@ -28,23 +27,60 @@ function AddAccount() {
   }
 
   function handleSubmit() {
-    addNewAccount(account, username, password);
-    addServer(serverName, hostIP, authIP);
-    saveCertLocation(certlocation);
-    createNotificationStore();
+    addNewAccountConfig(
+      account,
+      username,
+      password,
+      serverName,
+      hostIP,
+      authIP,
+      certlocation,
+      mountpoint
+    );
   }
 
   switch (step) {
     case 1:
-      return <UserDetails nextStep={nextStep} account={account} setAccount={setAccount} username={username} setUsername={setUsername} password={password} setPassword={setPassword} />;
+      return (
+        <UserDetails
+          nextStep={nextStep}
+          account={account}
+          setAccount={setAccount}
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+        />
+      );
     case 2:
-      return <ServerDetails prevStep={prevStep} nextStep={nextStep} serverName={serverName} setServerName={setServerName} hostIP={hostIP} setHostIP={setHostIP} authIP={authIP} setAuthIP={setAuthIP}/>;
+      return (
+        <ServerDetails
+          prevStep={prevStep}
+          nextStep={nextStep}
+          serverName={serverName}
+          setServerName={setServerName}
+          hostIP={hostIP}
+          setHostIP={setHostIP}
+          authIP={authIP}
+          setAuthIP={setAuthIP}
+        />
+      );
     case 3:
-      return <CertDetails prevStep={prevStep} nextStep={nextStep} handleSubmit={handleSubmit} certlocation={certlocation} setCertlocation={setCertlocation}/>;
+      return (
+        <OtherDetails
+          prevStep={prevStep}
+          nextStep={nextStep}
+          handleSubmit={handleSubmit}
+          certlocation={certlocation}
+          setCertlocation={setCertlocation}
+          mountpoint={mountpoint}
+          setMountpoint={setMountpoint}
+        />
+      );
     case 4:
-      return <Success account={account} serverName={serverName}/>;
+      return <Success account={account} serverName={serverName} />;
     default:
-      return <div>404 Not Found</div>
+      return <div>404 Not Found</div>;
   }
 }
 

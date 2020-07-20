@@ -2,7 +2,7 @@ const express = require("express");
 const { getFiles } = require("../APIs/files");
 const router = express.Router();
 
-router.post("/getfiles", (req, res) => {
+router.post("/files", (req, res) => {
   const list = getFiles(req.body.folder);
   if (list === null){
     res.sendStatus(404);

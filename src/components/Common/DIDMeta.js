@@ -17,11 +17,14 @@ const useStyles = makeStyles({
     maxHeight: "80%"
   },
   title: {
+    width: "100%",
     fontFamily: "Cern",
     fontWeight: 500,
     fontSize: 24,
     padding: 5,
+    marginLeft: 18,
     color: grey[800],
+    textAlign: "left"
   },
 });
 

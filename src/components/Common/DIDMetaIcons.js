@@ -24,7 +24,7 @@ function MetaIcons(props) {
     case "DATASET":
       return <FolderIcon className={classes.root} />;
     default:
-      return <DescriptionIcon className={classes.root} />;
+      return <div/>;
   }
 }
 

@@ -1,12 +1,12 @@
-import { currentUserMountPoint } from "../Utils/Files";
+import { currentUserMountPoint, parsePath } from "../Utils/Files";
 
 const currentDirectory = currentUserMountPoint();
 
 function directoryReducer(state = currentDirectory, action) {
   switch (action.type) {
     case "CD":
-      const newDir = state + "/" + action.folder;
-      return newDir;
+      const newDir = parsePath(state) + "/" + action.folder;
+      return parsePath(newDir);
     default:
       return state;
   }

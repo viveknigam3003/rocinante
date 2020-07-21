@@ -2,6 +2,8 @@ import React from "react";
 import { Breadcrumbs, makeStyles } from "@material-ui/core";
 import FileList from "./FileList";
 import DIDMeta from "./DIDMeta";
+import { cdToArray } from "../Utils/Files";
+import { useSelector } from "react-redux";
 
 const useStyles = makeStyles({
   Breadcrumbs: {
@@ -34,19 +36,8 @@ const didMetadata = {
 
 function Explore() {
   const classes = useStyles();
-  const cd = "/home/vivek/Desktop/GSoC_2020/rocinante";
+  const state = useSelector((state) => state);
   let key = 0;
-
-  /**
-   * Returns an array with folder names as elements.
-   * @param {String} cdString String from command `pwd` OR Present working directory string
-   * @example
-   * Input: "/home/user/Desktop"
-   * Output: ["home", "user", "Desktop"]
-   */
-  function cdToArray(cdString) {
-    return cdString.split("/").splice(1);
-  }
 
   return (
     <React.Fragment>
@@ -55,7 +46,7 @@ function Explore() {
         maxItems={3}
         aria-label="files"
       >
-        {cdToArray(cd).map((item) => (
+        {cdToArray(state.directory).map((item) => (
           <div key={++key}>{item}</div>
         ))}
       </Breadcrumbs>

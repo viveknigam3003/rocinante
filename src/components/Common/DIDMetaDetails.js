@@ -44,7 +44,7 @@ function DIDMetaDetails(props) {
         return "Scope";
       case "created_at":
         return "Created";
-      case "did_type":
+      case "type":
         return "DID Type";
       case "updated_at":
         return "Updated";
@@ -53,9 +53,11 @@ function DIDMetaDetails(props) {
       case "monotonic":
         return "Monotonic";
       case "bytes":
-        return "Bytes";
+        return "Size";
       case "is_open":
         return "Open";
+      case "length":
+        return "Length"
       default:
         return attr;
     }

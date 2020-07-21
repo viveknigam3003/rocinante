@@ -84,7 +84,7 @@ export function getFileMetadata(filePath) {
     mountpoint: path[0],
     server: path[1],
     scope: path[2] || null,
-    cd: path[path.length - 1],
+    filename: path[path.length - 1],
   };
   console.log(pathObject);
 }

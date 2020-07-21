@@ -1,9 +1,11 @@
 const fs = require("fs");
 
 function getFiles(folder) {
-  let list = [{name: "."}, {name: ".."}];
+  let list = [{ name: "." }, { name: ".." }];
   let files = [];
   let folders = [];
+
+  if (fs.statSync(folder).isFile()) return "FILE";
 
   try {
     fs.readdirSync(folder).forEach((file) => {

@@ -88,14 +88,22 @@ export function addNewAccountConfig(
   }
 }
 
+/**
+ * Takes in servername and returns the current account's config file corresponding to the server.
+ * @param {String} servername
+ */
 export function getCurrentAccountConfig(servername = "") {
   const accountConfigs = JSON.parse(localStorage.getItem("Accounts"));
+  const currentUser = getCurrentUser();
   for (let i = 0; i < accountConfigs.length; i++) {
-    if (servername === accountConfigs[i].server.name)
+    if (
+      servername === accountConfigs[i].server.name &&
+      currentUser.account === accountConfigs[i].account
+    )
       return accountConfigs[i];
   }
 
-  return {}
+  return {};
 }
 
 /**

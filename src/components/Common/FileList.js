@@ -9,7 +9,7 @@ import {
   TableCell,
   TableBody,
 } from "@material-ui/core";
-import { lsFolder, currentUserMountPoint } from "../Utils/Files";
+import { lsFolder, currentUserMountPoint, parsePath } from "../Utils/Files";
 import FileIcons from "./FileIcons";
 import { useSelector, useDispatch } from "react-redux";
 import { getFileMetadata } from "../Utils/Metadata";
@@ -50,7 +50,7 @@ function FileList() {
    * @param {String} folder folder name in the current directory
    */
   function renderFileList(folder) {
-    return lsFolder(cd.directory + "/" + folder).then((res) => {
+    return lsFolder(parsePath(cd.directory + "/" + folder)).then((res) => {
       if (res.status === 201) {
         getFileMetadata(cd.directory + "/" + folder).then((res) =>
           dispatch({ type: "GET_META", payload: res.data })

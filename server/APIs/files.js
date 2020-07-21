@@ -1,11 +1,12 @@
 const fs = require("fs");
 
-function getFiles(folder) {
+function getFiles(folder, mountpoint = "/ruciofs") {
   let list = [{ name: "." }, { name: ".." }];
   let files = [];
   let folders = [];
 
   if (fs.statSync(folder).isFile()) return "FILE";
+  if (folder === mountpoint) list = [];
 
   try {
     fs.readdirSync(folder).forEach((file) => {

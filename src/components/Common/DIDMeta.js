@@ -9,10 +9,9 @@ const useStyles = makeStyles({
     width: "100%",
     textAlign: "left",
     padding: 12,
-    marginLeft: 18,
     fontFamily: "Cern",
     fontWeight: 500,
-    color: grey[400]
+    color: grey[600]
   },
   root: {
     display: "flex",

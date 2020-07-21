@@ -49,7 +49,7 @@ export function cdToArray(cdString) {
 
 /**
  * Takes in an array and returns a string.
- * @param {Array} cdArray 
+ * @param {Array} cdArray
  * @example
  * Input: ["home", "user", "Desktop"]
  * Output: "/home/user/Desktop"
@@ -78,13 +78,4 @@ export function parsePath(path) {
   }
 }
 
-export function getFileMetadata(filePath) {
-  const path = cdToArray(filePath);
-  const pathObject = {
-    mountpoint: path[0],
-    server: path[1],
-    scope: path[2] || null,
-    filename: path[path.length - 1],
-  };
-  console.log(pathObject);
-}
+

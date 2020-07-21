@@ -38,13 +38,15 @@ Any changes will be refleted live in the app.
 
 ## Troubleshooting
 
-In case of an `code ELIFECYCLE` npm error, perform the following steps
+* In case of an `code ELIFECYCLE` npm error, perform the following steps
 
 ```BASH
 $ npm cache clean --force
 $ rm -rf node_modules package-lock.json
 $ npm install && npm start
 ```
+
+* Use `ctrl + R` or `cmd + R` (on MacOS) to refresh/reset the app if app freezes or crashes.
 
 ## Extra Notes
 

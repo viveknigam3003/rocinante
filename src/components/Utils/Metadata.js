@@ -10,13 +10,16 @@ const cookies = new Cookies();
  */
 export function getFileMetadata(filePath) {
   const path = cdToArray(filePath);
+
   const pathObject = {
     mountpoint: path[0],
     server: path[1],
     scope: path[2] || null,
     did: path[path.length - 1],
   };
+
   const currentAccountConfig = getCurrentAccountConfig(pathObject.server);
+  
   const payload = {
     certlocation: currentAccountConfig.certlocation,
     serverHost: currentAccountConfig.server.host,
@@ -24,8 +27,6 @@ export function getFileMetadata(filePath) {
     did: pathObject.did,
     token: "",
   };
-
-  console.log(pathObject);
 
   try {
     payload.token = cookies.get(currentAccountConfig.server.name);

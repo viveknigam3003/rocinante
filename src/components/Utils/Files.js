@@ -62,7 +62,7 @@ export function arrayToCd(cdArray) {
 }
 
 /**
- * Returns a new path free of ".." and "." folders
+ * Returns a new path free of `..` and `.` folders
  * @param {String} path Current Path (state)
  */
 export function parsePath(path) {

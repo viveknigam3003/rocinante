@@ -3,17 +3,14 @@ const getDIDmeta = require("../APIs/metadata");
 const router = express.Router();
 
 router.post("/metadata", async (req, res) => {
-  const accountConfig = req.body.accountConfig;
-  const certlocation = req.body.certlocation;
-  const scope = req.body.scope;
-  const did = req.body.did;
+  const payload = req.body.payload;
 
   await getDIDmeta(
-    certlocation,
-    accountConfig.server.host,
-    accountConfig.token.value,
-    scope,
-    did
+    payload.certlocation,
+    payload.serverHost,
+    payload.token,
+    payload.scope,
+    payload.did
   )
     .then((metadata) => {
       res.json(metadata.data);

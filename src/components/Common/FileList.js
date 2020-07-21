@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import { lsFolder, currentUserMountPoint } from "../Utils/Files";
 import FileIcons from "./FileIcons";
-import {useSelector, useDispatch} from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -35,7 +35,7 @@ const columns = [
 function FileList() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const cd = useSelector((state) => state)
+  const cd = useSelector((state) => state);
   const [rows, setRows] = useState([]);
   const entrypoint = currentUserMountPoint();
   let key = 0;
@@ -50,8 +50,12 @@ function FileList() {
    */
   function renderFileList(folder) {
     return lsFolder(cd.directory + "/" + folder).then((res) => {
-      setRows(res.data);
-      dispatch({type: "CD", folder: folder});
+      if (res.status === 201)
+        dispatch({ type: "GET_META", file: cd.directory + "/" + folder });
+      else {
+        setRows(res.data);
+        dispatch({ type: "CD", folder: folder });
+      }
     });
   }
 
@@ -85,7 +89,7 @@ function FileList() {
                         onClick={() => renderFileList(row.name)}
                       >
                         <div style={{ display: "flex", alignItems: "center" }}>
-                          <FileIcons type={row.type} rowValue={value}/>
+                          <FileIcons type={row.type} rowValue={value} />
                           {value}
                         </div>
                       </TableCell>

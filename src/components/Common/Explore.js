@@ -21,22 +21,10 @@ const useStyles = makeStyles({
   },
 });
 
-const didMetadata = {
-  account: "vivek",
-  name: "newDataset",
-  created_at: "2020-04-13 15:39:02",
-  did_type: "DATASET",
-  scope: " newScope",
-  updated_at: " 2020-04-13 15:39:02",
-  availability: "AVAILABLE",
-  monotonic: "false",
-  bytes: "null",
-  is_open: "true",
-};
-
 function Explore() {
   const classes = useStyles();
   const state = useSelector((state) => state);
+  const metadataObj = state.metadata
   let key = 0;
 
   return (
@@ -53,9 +41,9 @@ function Explore() {
       <div id="explore-content" className={classes.content}>
         <FileList />
         <DIDMeta
-          icon={didMetadata.did_type}
-          did={didMetadata.name}
-          meta={didMetadata}
+          icon={metadataObj.type}
+          did={metadataObj.name}
+          meta={metadataObj}
         />
       </div>
     </React.Fragment>

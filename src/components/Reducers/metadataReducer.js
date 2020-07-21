@@ -1,12 +1,22 @@
-import { getFileMetadata } from "../Utils/Metadata";
+import { readableBytes } from "../Utils/Metadata";
 
 const fileMeta = {};
 
-function metadataReducer(state = fileMeta, action) {
+ function metadataReducer(state = fileMeta, action) {
   switch (action.type) {
     case "GET_META":
-      const newMetaState = getFileMetadata(action.file).then(res => console.log(res.data));
-      return newMetaState;
+      const didMetadata = action.payload;
+      const newState = {
+        account: didMetadata.account,
+        name: didMetadata.name,
+        bytes: readableBytes(didMetadata.bytes),
+        scope: didMetadata.scope,
+        length: didMetadata.length,
+        type: didMetadata.type
+      }
+      return newState;
+    case "CLEAR_META":
+      return {};
     default:
       return state;
   }

@@ -12,6 +12,7 @@ import {
 import { lsFolder, currentUserMountPoint } from "../Utils/Files";
 import FileIcons from "./FileIcons";
 import { useSelector, useDispatch } from "react-redux";
+import { getFileMetadata } from "../Utils/Metadata";
 
 const useStyles = makeStyles({
   root: {
@@ -50,9 +51,11 @@ function FileList() {
    */
   function renderFileList(folder) {
     return lsFolder(cd.directory + "/" + folder).then((res) => {
-      if (res.status === 201)
-        dispatch({ type: "GET_META", file: cd.directory + "/" + folder });
-      else {
+      if (res.status === 201) {
+        getFileMetadata(cd.directory + "/" + folder).then((res) =>
+          dispatch({ type: "GET_META", payload: res.data })
+        );
+      } else {
         setRows(res.data);
         dispatch({ type: "CD", folder: folder });
       }

@@ -32,7 +32,6 @@ const columns = [
   { id: "type", label: "Type", minWidth: 100 },
 ];
 
-//TODO: Refactor Code to support actual metadata
 function FileList() {
   const classes = useStyles();
   const dispatch = useDispatch();

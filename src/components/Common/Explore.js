@@ -27,6 +27,14 @@ function Explore() {
   const metadataObj = state.metadata
   let key = 0;
 
+  // TODO:
+  // Add Empty Mountpoint Screen
+  // Add No Metadata View
+  // Show Container/Dataset Metadata on Click, Second Click opens folder.
+
+  // FIXME:
+  // Clear File Metadata when changing directory
+  
   return (
     <React.Fragment>
       <Breadcrumbs

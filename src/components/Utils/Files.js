@@ -25,15 +25,18 @@ export function lsFolder(folder) {
  */
 export function currentUserMountPoint() {
   const currentUser = getCurrentUser();
-  const accounts = JSON.parse(localStorage.getItem("Accounts"));
-
-  for (let i = 0; i < accounts.length; i++) {
-    if (accounts[i].account === currentUser.account) {
-      return accounts[i].mountpoint;
+  try {
+    const accounts = JSON.parse(localStorage.getItem("Accounts"));
+    for (let i = 0; i < accounts.length; i++) {
+      if (accounts[i].account === currentUser.account) {
+        return accounts[i].mountpoint;
+      }
     }
-
-    return "/";
+  } catch {
+    localStorage.setItem("Accounts", JSON.stringify([]));
   }
+
+  return "/";
 }
 
 /**
@@ -77,5 +80,3 @@ export function parsePath(path) {
       return path;
   }
 }
-
-

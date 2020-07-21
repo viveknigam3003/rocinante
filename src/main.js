@@ -23,6 +23,7 @@ const createWindow = () => {
   });
 
   window.loadURL("http://localhost:3005");
+  window.setMenuBarVisibility(false)
 };
 
 ipcMain.on("show-window", () => {

@@ -81,7 +81,7 @@ function OtherDetails(props) {
         <LogoDark className={classes.logo}/>
         <div className={classes.title}>Add a new account</div>
         <div className={classes.subtitle}>
-          Specify your certificate location.
+          Specify your certificate location and FUSE mountpoint.
         </div>
         <form>
           <TextField
@@ -103,8 +103,8 @@ function OtherDetails(props) {
             id="mountpoint"
             label="FUSE Mountpoint"
             name="mountpoint"
-            autoFocus
             defaultValue={props.mountpoint}
+            helperText="Default: /ruciofs"
             onChange={(e) => props.setMountpoint(e.target.value)}
           />
         </form>

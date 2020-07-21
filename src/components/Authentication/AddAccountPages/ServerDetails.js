@@ -71,7 +71,7 @@ function ServerDetails(props) {
   }
 
   function validateForm() {
-    return props.serverName.length > 0 && props.hostIP.length > 0 && props.authIP.length > 0;
+    return props.serverName.length > 0 && props.rucioHost.length > 0 && props.authHost.length > 0;
   }
 
   return (
@@ -93,6 +93,7 @@ function ServerDetails(props) {
             label="Server Name"
             name="servername"
             autoFocus
+            helperText="Same as FUSE/RucioFS cfg filename"
             defaultValue={props.serverName}
             onChange={(e) => props.setServerName(e.target.value)}
           />
@@ -101,24 +102,24 @@ function ServerDetails(props) {
             margin="normal"
             required
             fullWidth
-            name="hostIP"
-            label="Host IP"
-            type="ip"
-            id="hostIP"
-            defaultValue={props.hostIP}
-            onChange={(e) => props.setHostIP(e.target.value)}
+            name="host"
+            label="Rucio Host"
+            type="text"
+            id="rucioHost"
+            defaultValue={props.rucioHost}
+            onChange={(e) => props.setRucioHost(e.target.value)}
           />
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="authIP"
-            label="Auth IP"
-            type="ip"
-            id="ip"
-            defaultValue={props.authIP}
-            onChange={(e) => props.setAuthIP(e.target.value)}
+            name="auth"
+            label="Auth Host"
+            type="text"
+            id="authHost"
+            defaultValue={props.authHost}
+            onChange={(e) => props.setAuthHost(e.target.value)}
           />
         </form>
         <ButtonGroup>

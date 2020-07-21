@@ -54,7 +54,6 @@ export function authTokensPresent() {
   return authTokens.length > 0;
 }
 
-
 export function addNewAccountConfig(
   account,
   username,
@@ -87,6 +86,16 @@ export function addNewAccountConfig(
     accountConfigs.push(newAccountConfig);
     localStorage.setItem("Accounts", JSON.stringify(accountConfigs));
   }
+}
+
+export function getCurrentAccountConfig(servername = "") {
+  const accountConfigs = JSON.parse(localStorage.getItem("Accounts"));
+  for (let i = 0; i < accountConfigs.length; i++) {
+    if (servername === accountConfigs[i].server.name)
+      return accountConfigs[i];
+  }
+
+  return {}
 }
 
 /**

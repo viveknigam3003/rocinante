@@ -5,6 +5,15 @@ import { grey } from "@material-ui/core/colors";
 import DIDMetaDetails from "./DIDMetaDetails";
 
 const useStyles = makeStyles({
+  rootTitle: {
+    width: "100%",
+    textAlign: "left",
+    padding: 12,
+    marginLeft: 18,
+    fontFamily: "Cern",
+    fontWeight: 500,
+    color: grey[400]
+  },
   root: {
     display: "flex",
     flexDirection: "column",
@@ -33,6 +42,7 @@ function DIDMeta(props) {
   
   return (
     <Paper variant="outlined" className={classes.root}>
+      <div className={classes.rootTitle}>Details</div>
       <MetaIcons icon={props.icon} />
       <div id="did-name" className={classes.title}>
         {props.did}

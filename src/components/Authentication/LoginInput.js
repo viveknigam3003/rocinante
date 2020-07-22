@@ -5,7 +5,10 @@ import TextField from "@material-ui/core/TextField";
 import { makeStyles } from "@material-ui/core";
 import LoginButton from "./LoginButton";
 import { Redirect } from "react-router-dom";
-import { saveCurrentUser } from "../Utils/User";
+import { saveCurrentUser, authTokensPresent } from "../Utils/User";
+import { loginWithUserpass } from "../Utils/Authentication";
+import { useAuth } from "./AuthContext";
+import LoginSnackbar from "./LoginSnackbar";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -24,6 +27,9 @@ function LoginInput() {
   const [password, setPassword] = useState("");
   const [loggedin, setLoggedin] = useState(false);
   const [loading, setLoading] = useState();
+  const [status, setStatus] = useState(0);
+  const { setAuthToken } = useAuth();
+
   /**
    * Validates the form responses to prevent empty required fields
    */
@@ -32,15 +38,43 @@ function LoginInput() {
   }
 
   /**
+   * Updates the status to display the alert accordingly.
+   *
+   * @param {number} value Status Code to set as status for the request.
+   */
+  function updateStatus(value) {
+    setStatus(null);
+    const newStatus = value;
+    setStatus(newStatus);
+  }
+
+  /**
    * Handles the Login event on form submit.
    */
   function handleSubmit(event) {
     if (loading) return;
     event.preventDefault();
-    console.log("Submit Handled");
-    setLoading(true)
-    setLoggedin(true)
-    saveCurrentUser(account, username, password);
+    setLoading(true);
+    loginWithUserpass(account, username, password)
+      .then((res) => {
+        setLoading(loading ? false : null);
+        if (res.status === 200) {
+          const auth = authTokensPresent();
+          setAuthToken(auth);
+          saveCurrentUser(account, username, password);
+          updateStatus(200);
+          setTimeout(() => setLoggedin(true), 2000);
+        }
+      })
+      .catch((err) => {
+        setLoading(loading ? false : null);
+        const errorcode = Number(err.toString().split(" ").pop());
+        if (errorcode === 401) {
+          updateStatus(401);
+        } else if (errorcode === 500) {
+          updateStatus(500);
+        } else console.log(err);
+      });
   }
 
   if (loggedin) {
@@ -100,6 +134,7 @@ function LoginInput() {
           Sign in
         </LoginButton>
       </form>
+      <LoginSnackbar status={status}/>
     </Container>
   );
 }

@@ -8,9 +8,7 @@ import axios from "axios";
  */
 export function loginWithUserpass(account, username, password) {
   const payload = {
-    account: account,
-    username: username,
-    password: password,
+    currentUser: { account: account, username: username, password: password },
     configs: JSON.parse(localStorage.getItem("Accounts")),
   };
 
@@ -22,6 +20,4 @@ export function loginWithUserpass(account, username, password) {
       },
       withCredentials: true,
     })
-    .then(console.log("Attempted Login with Userpass"))
-    .catch((err) => console.log(err));
 }

@@ -5,7 +5,6 @@ const cookies = new Cookies();
 
 /**
  * Returns an Array Object with all the available tokens
- * {servername: String, token: String}
  */
 export function getAvailableTokens() {
   let tokens = [];

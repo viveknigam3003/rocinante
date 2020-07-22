@@ -35,7 +35,7 @@ export function getFileMetadata(filePath) {
   }
 
   try {
-    const response = axios.post("http://localhost:3004/metadata", {
+    const response = axios.post("/metadata", {
       payload,
       headers: {
         "Content-Type": "application/json",

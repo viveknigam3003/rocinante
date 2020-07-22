@@ -7,7 +7,7 @@ import { getCurrentUser } from "./User";
  */
 export function lsFolder(folder) {
   try {
-    const response = axios.post("http://localhost:3004/files", {
+    const response = axios.post("/files", {
       folder,
       headers: {
         "Content-Type": "application/json",

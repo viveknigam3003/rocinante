@@ -10,7 +10,6 @@ import { authTokensPresent } from "./components/Utils/User";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
 
 function App() {
-  const viewContext = "U"; //U: User View, A: Admin View
   const existingToken = authTokensPresent();
   const [authToken, setAuthToken] = useState(existingToken);
 
@@ -27,11 +26,8 @@ function App() {
             path="/auth/user"
             component={() => <LoginForm privilege="user" />}
           />
-          <Route path="/adduser" component={() => <AddAccount />} />
-          <PrivateRoute
-            path="/app"
-            component={() => <AppLayout viewContext={viewContext} />}
-          />
+          <Route path="/adduser" component={AddAccount} />
+          <PrivateRoute path="/app" component={AppLayout} />
         </div>
       </Router>
     </AuthContext.Provider>

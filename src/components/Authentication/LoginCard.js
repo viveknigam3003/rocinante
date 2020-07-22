@@ -46,7 +46,10 @@ function LoginCard(props) {
       onMouseLeave={() => setEnter(false)}
       className={classes.card}
     >
-      <CardActionArea className={classes.cardContent}>
+      <CardActionArea
+        className={classes.cardContent}
+        onClick={localStorage.setItem("viewContext", props.text.toLowerCase())}
+      >
         <Link to={props.link} className={classes.cardContent}>
           {enter ? (
             props.iconFor === "admin" ? (

@@ -31,6 +31,8 @@ function Explore() {
   // Add Empty Mountpoint Screen
   // Add No Metadata View
   // Show Container/Dataset Metadata on Click, Second Click opens folder.
+  // Add cache status for files.
+  // EXTRA: Add Recent Files
 
   // FIXME:
   // Clear File Metadata when changing directory

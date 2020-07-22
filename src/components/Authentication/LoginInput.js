@@ -29,6 +29,7 @@ function LoginInput() {
   const [loading, setLoading] = useState();
   const [status, setStatus] = useState(0);
   const { setAuthToken } = useAuth();
+  const auth = authTokensPresent();
 
   /**
    * Validates the form responses to prevent empty required fields
@@ -59,7 +60,6 @@ function LoginInput() {
       .then((res) => {
         setLoading(loading ? false : null);
         if (res.status === 200) {
-          const auth = authTokensPresent();
           setAuthToken(auth);
           saveCurrentUser(account, username, password);
           updateStatus(200);

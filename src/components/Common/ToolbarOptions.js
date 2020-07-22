@@ -12,9 +12,10 @@ const useStyles = makeStyles({
 
 function ToolbarOptions() {
   const classes = useStyles();
+
   return (
     <div id="options">
-      <IconButton className={classes.optionIcon}>
+      <IconButton className={classes.optionIcon} href="#app/settings">
         <SettingsIcon />
       </IconButton>
       <IconButton className={classes.optionIcon}>

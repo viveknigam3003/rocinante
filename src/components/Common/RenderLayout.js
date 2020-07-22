@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 48,
     opacity: 0.85,
     width: "inherit",
-    color: "#3e55ab"
+    color: "#3e55ab",
   },
 }));
 
@@ -37,6 +37,8 @@ function RenderLayout(props) {
       case "Rules":
         return <div />;
       case "Monitoring":
+        return <div />;
+      case "Settings":
         return <div />;
       default:
         return <Redirect to="/" />;

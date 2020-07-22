@@ -1,6 +1,7 @@
 import { Cookies } from "react-cookie";
 import { getAllServersByNames } from "./Servers";
 import axios from "axios";
+import { getCurrentUser } from "./User";
 const cookies = new Cookies();
 
 /**
@@ -24,23 +25,15 @@ export function getAvailableTokens() {
 
 /**
  * Performs a token refresh with current user's valid credentials through Userpass.
- * @param {{account: String, username: String, password: String}} payload Current User credentials
  */
-export async function refreshToken(payload) {
-  const currentUser = {
-    account: payload.account,
-    username: payload.username,
-    password: payload.password,
+export async function refreshToken() {
+  const payload = {
+    currentUser: getCurrentUser(),
+    configs: JSON.parse(localStorage.getItem("Accounts")),
   };
-  const accountList = JSON.parse(localStorage.getItem("Accounts"));
-  const servers = JSON.parse(localStorage.getItem("servers"));
-  const certlocation = localStorage.getItem("usercert")
-  
+
   return axios.post("/login/userpass", {
-    currentUser,
-    accountList,
-    servers,
-    certlocation,
+    payload,
     headers: {
       "Content-Type": "application/json",
     },

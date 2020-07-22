@@ -22,13 +22,11 @@ function AppLayout(props) {
 
   return (
     <React.Fragment>
+      <Route path="/app/explore" component={() => <Landing page="Explore" />} />
+      <Route path="/app/storage" component={() => <Landing page="Storage" />} />
       <Route
-        path="/app/explore"
-        component={() => <Landing page="Explore" view={props.viewContext} />}
-      />
-      <Route
-        path="/app/storage"
-        component={() => <Landing page="Storage" view={props.viewContext} />}
+        path="/app/settings"
+        component={() => <Landing page="Settings"/>}
       />
     </React.Fragment>
   );

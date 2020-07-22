@@ -69,11 +69,8 @@ function LoginInput() {
       .catch((err) => {
         setLoading(loading ? false : null);
         const errorcode = Number(err.toString().split(" ").pop());
-        if (errorcode === 401) {
-          updateStatus(401);
-        } else if (errorcode === 500) {
-          updateStatus(500);
-        } else console.log(err);
+        if (typeof(errorcode) === "number") updateStatus(errorcode);
+        else console.log(err);
       });
   }
 

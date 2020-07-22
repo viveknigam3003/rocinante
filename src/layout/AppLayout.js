@@ -5,7 +5,7 @@ import { refreshToken } from "../components/Utils/Tokens";
 import { authTokensPresent } from "../components/Utils/User";
 import { useAuth } from "../components/Authentication/AuthContext";
 
-function AppLayout(props) {
+function AppLayout() {
   const { setAuthToken } = useAuth();
 
   React.useEffect(() => {

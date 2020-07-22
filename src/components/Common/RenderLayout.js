@@ -2,6 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import Explore from "./Explore";
 import { Redirect } from "react-router-dom";
+import Settings from "./Settings";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -39,7 +40,7 @@ function RenderLayout(props) {
       case "Monitoring":
         return <div />;
       case "Settings":
-        return <div />;
+        return <Settings />;
       default:
         return <Redirect to="/" />;
     }

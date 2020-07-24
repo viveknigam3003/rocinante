@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import PropTypes from 'prop-types';
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import { Link } from "react-router-dom";
@@ -48,7 +49,7 @@ function LoginCard(props) {
     >
       <CardActionArea
         className={classes.cardContent}
-        onClick={localStorage.setItem("viewContext", props.text.toLowerCase())}
+        onClick={localStorage.setItem("viewContext", (props.text).toLowerCase())}
       >
         <Link to={props.link} className={classes.cardContent}>
           {enter ? (
@@ -76,6 +77,12 @@ function LoginCard(props) {
       </CardActionArea>
     </Card>
   );
+}
+
+LoginCard.propTypes = {
+  link: PropTypes.string,
+  text: PropTypes.string,
+  iconFor: PropTypes.string,
 }
 
 export default LoginCard;

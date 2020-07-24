@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from 'prop-types';
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
@@ -29,11 +30,18 @@ export default function AlertSnackbar(props) {
 
   return (
     <div className={classes.root}>
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose}>
+      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} onExited={props.onExited}>
         <Alert onClose={handleClose} severity={props.severity}>
           {props.message}
         </Alert>
       </Snackbar>
     </div>
   );
+}
+
+AlertSnackbar.propTypes = {
+  open: PropTypes.bool,
+  severity: PropTypes.string,
+  message: PropTypes.string,
+  onExited: PropTypes.func
 }

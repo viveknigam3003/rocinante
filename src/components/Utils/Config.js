@@ -5,7 +5,7 @@ const cookies = new Cookies();
 
 /**
  * GETs all the Config sections from the `server`. Works only for ADMIN accounts
- * @param {String} server Rucio Host  
+ * @param {String} server Rucio Host
  */
 export function getConfig(server) {
   const currentAccountConfig = getCurrentAccountConfig(server);
@@ -18,7 +18,7 @@ export function getConfig(server) {
 
   try {
     payload.token = cookies.get(currentAccountConfig.server.name);
-  } catch {
+  } catch (err) {
     return 401;
   }
 
@@ -31,7 +31,7 @@ export function getConfig(server) {
     });
 
     return response;
-  } catch {
+  } catch (err) {
     return 500;
   }
 }

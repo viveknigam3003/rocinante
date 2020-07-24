@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { makeStyles, IconButton } from "@material-ui/core";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
 import LogoDark from "../../layout/LogoDark";
 import LoginInput from "./LoginInput";
+import LoginSnackbar from "./LoginSnackbar";
+import { useAuth } from "./AuthContext";
+import { loginWithUserpass } from "../Utils/Authentication";
+import { authTokensPresent, saveCurrentUser } from "../Utils/User";
+import { Redirect } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -36,6 +43,41 @@ const useStyles = makeStyles({
 
 function LoginForm(props) {
   const classes = useStyles();
+  const [loading, setLoading] = useState();
+  const { setAuthToken } = useAuth();
+  const storeState = useSelector((state) => state);
+  const dispatch = useDispatch();
+  const auth = authTokensPresent();
+
+  React.useEffect(() => {
+    setAuthToken(auth);
+  }, [setAuthToken, auth]);
+
+  /**
+   * Handles the Login event on form submit.
+   */
+  function handleSubmit(event, account, username, password) {
+    if (loading) return;
+    event.preventDefault();
+    setLoading(true);
+    loginWithUserpass(account, username, password)
+      .then(() => {
+        setLoading(loading ? false : null);
+        saveCurrentUser(account, username, password);
+        dispatch({type: "SUCCESS"});
+      })
+      .catch((err) => {
+        setLoading(loading ? false : null);
+        const errorcode = Number(err.toString().split(" ").pop());
+        if (errorcode === 401) dispatch({type: "UNAUTHORIZED"});
+        else if (errorcode === 500) dispatch({type: "SERVER_ERR"});
+        else console.log(err);
+      });
+  }
+
+  if (storeState.login) {
+    return <Redirect to="/app/explore" />;
+  }
 
   return (
     <React.Fragment>
@@ -49,10 +91,18 @@ function LoginForm(props) {
             Login with {props.privilege} rights
           </div>
         </div>
-        <LoginInput />
+        <LoginInput
+          loading={loading}
+          handleSubmit={handleSubmit}
+        />
+        <LoginSnackbar />
       </div>
     </React.Fragment>
   );
 }
+
+LoginForm.propTypes = {
+  privilege: PropTypes.string,
+};
 
 export default LoginForm;

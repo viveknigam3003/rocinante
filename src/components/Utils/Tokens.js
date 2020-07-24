@@ -8,11 +8,11 @@ const cookies = new Cookies();
  * Returns an Array Object with all the available tokens
  */
 export function getAvailableTokens() {
-  let tokens = [];
+  const tokens = [];
   const serverlist = getAllServersByNames();
   for (let i = 0; i < serverlist.length; i++) {
     if (cookies.get(serverlist[i]) !== undefined) {
-      let tokenDict = {
+      const tokenDict = {
         servername: serverlist[i],
         token: cookies.get(serverlist[i]),
       };

@@ -32,7 +32,7 @@ export function currentUserMountPoint() {
         return accounts[i].mountpoint;
       }
     }
-  } catch {
+  } catch (err) {
     localStorage.setItem("Accounts", JSON.stringify([]));
   }
 

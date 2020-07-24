@@ -5,10 +5,10 @@ import { Cookies } from "react-cookie";
  * This is useful since the tokens are stored in cookies with the server's hostname as the key.
  */
 export function getAllServersByNames() {
-  let serverNames = [];
+  const serverNames = [];
   const accounts = JSON.parse(localStorage.getItem("Accounts"));
   for (let i = 0; i < accounts.length; i++){
-    let name = accounts[i].server.name;
+    const name = accounts[i].server.name;
     serverNames.push(name);
   }
 
@@ -17,10 +17,10 @@ export function getAllServersByNames() {
 
 export function serverStatus() {
   const cookies = new Cookies();
-  let status = [];
+  const status = [];
   const servernames = getAllServersByNames();
 
-  //UPDATE LOGIC! THIS DOESN'T WORK
+  // UPDATE LOGIC! THIS DOESN'T WORK
   for (let i = 0; i < servernames.length; i++){
     if (cookies.get(servernames[i]) !== undefined)
       status.push({server: servernames[i], status: "Connected"})

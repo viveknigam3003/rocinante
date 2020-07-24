@@ -78,11 +78,11 @@ export function addNewAccountConfig(
   };
 
   try {
-    let accountConfigs = JSON.parse(localStorage.getItem("Accounts"));
+    const accountConfigs = JSON.parse(localStorage.getItem("Accounts"));
     accountConfigs.push(newAccountConfig);
     localStorage.setItem("Accounts", JSON.stringify(accountConfigs));
-  } catch {
-    let accountConfigs = [];
+  } catch (err) {
+    const accountConfigs = [];
     accountConfigs.push(newAccountConfig);
     localStorage.setItem("Accounts", JSON.stringify(accountConfigs));
   }

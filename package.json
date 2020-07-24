@@ -56,6 +56,14 @@
   "devDependencies": {
     "concurrently": "^5.2.0",
     "electron": "^9.1.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-config-standard": "^14.1.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.3",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-standard": "^4.0.1",
     "nodemon": "^2.0.4",
     "wait-on": "^5.1.0"
   },

@@ -1,14 +1,19 @@
 import React from "react";
 import AlertSnackbar from "../Utils/Snackbar";
+import { useDispatch, useSelector } from "react-redux";
 
-function LoginSnackbar(props) {
-  switch (props.status) {
+function LoginSnackbar() {
+  const dispatch = useDispatch();
+  const storeState = useSelector((state) => state)
+
+  switch (storeState.status) {
     case 200:
       return (
         <AlertSnackbar
           open={true}
           severity="success"
           message="Signed in to Rucio"
+          onExited={() => dispatch({ type: "LOG_IN" })}
         />
       );
     case 401:
@@ -28,7 +33,7 @@ function LoginSnackbar(props) {
         />
       );
     default:
-      return <div />;
+      return null;
   }
 }
 

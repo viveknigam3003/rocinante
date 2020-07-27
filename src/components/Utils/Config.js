@@ -7,12 +7,12 @@ const cookies = new Cookies();
  * GETs all the Config sections from the `server`. Works only for ADMIN accounts
  * @param {String} server Rucio Host
  */
-export function getConfig(server) {
+export async function getConfig(server) {
   const currentAccountConfig = getCurrentAccountConfig(server);
-
+  
   const payload = {
     certlocation: currentAccountConfig.certlocation,
-    serverHost: currentAccountConfig.server,
+    server: currentAccountConfig.server,
     token: "",
   };
 

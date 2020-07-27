@@ -26,7 +26,7 @@ const useStyles = makeStyles({
   },
 });
 
-//Add Objects to this array to add columns to FileList.
+// Add Objects to this array to add columns to FileList.
 const columns = [
   { id: "name", label: "Name", minWidth: 100 },
   { id: "type", label: "Type", minWidth: 100 },

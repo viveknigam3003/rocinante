@@ -1,42 +1,67 @@
 import React, { useState } from "react";
-import { makeStyles, Button, Paper } from "@material-ui/core";
+import { makeStyles, Accordion, AccordionSummary, Typography, AccordionDetails } from "@material-ui/core";
 import { serverStatus } from "../Utils/Servers";
+import { green, red } from "@material-ui/core/colors";
+import SettingsIcon from '@material-ui/icons/Settings';
+import ServerConfig from "./ServerConfig";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: "Cern",
     paddingTop: 10,
     paddingBottom: 10,
     fontSize: 20,
+    width: '100%',
   },
   listItem: {
     display: "flex",
     justifyContent: "space-between",
     alignItems: "center",
+    color: "#000000",
+    opacity: 0.8,
+    fontSize: theme.typography.pxToRem(15),
+    flexBasis: '33.33%',
+    flexShrink: 0,
   },
-  status: {
-    fontSize: 18,
+  statusC: {
+    fontSize: theme.typography.pxToRem(15),
+    color: green[600],
+    fontWeight: 500,
+    opacity: 1,
   },
-});
+  statusD: {
+    fontSize: theme.typography.pxToRem(15),
+    color: red[600],
+    fontWeight: 500,
+    opacity: 1,
+  },
+}));
 
 function ServerList() {
   const classes = useStyles();
   const serverDetails = serverStatus();
-  const [open, setOpen] = useState(false);
+  const [expanded, setExpanded] = useState(false);
 
-  const handleClick = () => setOpen(!open);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
 
   return (
     <div id="server-list" className={classes.root}>
       {serverDetails.map((item, index) => (
-        <div key={item.server}>
-          <div className={classes.listItem}>
-            <div>{item.server}</div>
-            <div className={classes.status}>{item.status}</div>
-            <Button onClick={handleClick}>Config</Button>
-          </div>
-          {open ? <Paper>Configs</Paper> : null}
-        </div>
+        <Accordion expanded={expanded === index} onChange={handleChange(index)} key={item.server}>
+        <AccordionSummary
+          expandIcon={<SettingsIcon />}
+          aria-controls={`${item.server}-content`}
+          id={`${item.server}-header`}
+        >
+          <Typography className={classes.listItem}>{item.server}</Typography>
+          <Typography className={item.status === "Connected" ? classes.statusC : classes.statusD}>{item.status}</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <ServerConfig server = {item.server}/>
+        </AccordionDetails>
+      </Accordion>
       ))}
     </div>
   );

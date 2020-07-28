@@ -1,25 +1,15 @@
 import React, { useState } from "react";
-import { makeStyles, AccordionDetails, IconButton } from "@material-ui/core";
+import { makeStyles, AccordionDetails } from "@material-ui/core";
 import PropTypes from "prop-types";
 import EditButtons from "./ServerConfigEdit";
 import ServerConfigEditForm from "./ServerConfigEditForm";
-import AddIcon from "@material-ui/icons/Add";
+import ServerConfigTitle from "./ServerConfigTitle";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     fontFamily: "Cern",
     fontSize: theme.typography.pxToRem(15),
     minWidth: "100%",
-  },
-  title: {
-    fontFamily: "Cern",
-    fontWeight: 500,
-    fontSize: 14,
-    color: "#000000",
-    width: "60%",
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
   section: {
     padding: 2,
@@ -56,12 +46,7 @@ function ServerConfig(props) {
   return (
     <AccordionDetails>
       <div className={classes.root}>
-        <div id="title" className={classes.title}>
-          <span style={{ opacity: 0.5 }}>Config</span>
-          <IconButton>
-            <AddIcon fontSize="inherit" color="primary" />
-          </IconButton>
-        </div>
+        <ServerConfigTitle />
         {Object.keys(config).map((section, index) => (
           <div key={section} className={classes.section}>
             <div className={classes.sectionTitle}>
@@ -109,7 +94,7 @@ function ServerConfig(props) {
 
 ServerConfig.propTypes = {
   config: PropTypes.object,
-  server: PropTypes.string
+  server: PropTypes.string,
 };
 
 export default ServerConfig;

@@ -9,21 +9,23 @@ const useStyles = makeStyles({
     paddingTop: 10,
     paddingBottom: 10,
     fontFamily: "Cern",
-  }, 
+  },
   title: {
     fontSize: 14,
     fontWeight: 500,
     color: "#000000",
     opacity: 0.5,
-  }
-})
+  },
+});
 
 function AdminSettings() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <div id="title" className={classes.title}>Servers</div>
-      <ServerList/>
+      <div id="title" className={classes.title}>
+        Servers
+      </div>
+      <ServerList />
     </div>
   );
 }

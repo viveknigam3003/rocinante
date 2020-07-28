@@ -5,7 +5,8 @@ import ServerList from "./ServerList";
 
 const useStyles = makeStyles({
   root: {
-    maxWidth: "40%",
+    minWidth: "40%",
+    maxWidth: "60%",
     paddingTop: 10,
     paddingBottom: 10,
     fontFamily: "Cern",

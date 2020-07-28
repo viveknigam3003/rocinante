@@ -87,7 +87,7 @@ function ServerList() {
             </Typography>
           </AccordionSummary>
           {config !== undefined ? (
-            <ServerConfig config={config} />
+            <ServerConfig config={config} server={item.server} />
           ) : (
             <Typography className={classes.listItem}>Loading...</Typography>
           )}

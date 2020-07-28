@@ -7,18 +7,19 @@ import { useAuth } from "../components/Authentication/AuthContext";
 
 function AppLayout() {
   const { setAuthToken } = useAuth();
+  const authTokens = authTokensPresent()
 
   React.useEffect(() => {
     try {
       setInterval(() => {
         refreshToken();
-        setAuthToken(authTokensPresent());
-        console.log("Token Refreshed!");
+        setAuthToken(authTokens);
+        console.log(`Token Refreshed! ${Date()}` );
       }, 58 * 60 * 1000);
     } catch (e) {
       console.log(e);
     }
-  }, [setAuthToken]);
+  }, [setAuthToken, authTokens]);
 
   return (
     <React.Fragment>

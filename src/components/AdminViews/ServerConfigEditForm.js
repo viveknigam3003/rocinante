@@ -17,7 +17,7 @@ function ServerConfigEditForm(props) {
   const classes = useStyles();
   return (
     <form className={classes.root}>
-      <TextField id="option" size="small" defaultValue={props.option} />
+      <TextField id="option" size="small" disabled defaultValue={props.option} />
       <TextField
         size="small"
         id="option-value"

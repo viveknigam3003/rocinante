@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { makeStyles, AccordionDetails } from "@material-ui/core";
+import { makeStyles, AccordionDetails, IconButton } from "@material-ui/core";
 import PropTypes from "prop-types";
 import EditButtons from "./ServerConfigEdit";
 import ServerConfigEditForm from "./ServerConfigEditForm";
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,12 +16,13 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 500,
     fontSize: 14,
     color: "#000000",
-    opacity: 0.5,
-    padding: 10,
-    paddingTop: 0,
+    width: "60%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "space-between"
   },
   section: {
-    padding: 10,
+    padding: 2,
   },
   sectionTitle: {
     color: "#3e55ab",
@@ -55,7 +57,10 @@ function ServerConfig(props) {
     <AccordionDetails>
       <div className={classes.root}>
         <div id="title" className={classes.title}>
-          Config
+          <span style={{opacity: 0.5}}>Config</span>
+          <IconButton>
+          <AddIcon fontSize="inherit" color="primary" />
+          </IconButton>
         </div>
         {Object.keys(config).map((section, index) => (
           <div key={section} className={classes.section}>

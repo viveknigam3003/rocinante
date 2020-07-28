@@ -1,6 +1,5 @@
 import React from "react";
 import { Typography, makeStyles } from "@material-ui/core";
-import { getConfig } from "../Utils/Config";
 import PropTypes from "prop-types";
 
 const useStyles = makeStyles((theme) => ({
@@ -12,23 +11,26 @@ const useStyles = makeStyles((theme) => ({
 
 function ServerConfig(props) {
   const classes = useStyles();
-  const servername = props.server;
+  const config = props.config || {};
 
-  React.useEffect(() => {
-    async function fetchConfig(){
-      await getConfig(servername)
-       .then((res) => console.log(res.data))
-       .catch((err) => console.log(err));
-    }
+  function parseConfig(configObj) {
+    const parsedConfig = [];
+    Object.keys(configObj).forEach((key, index) => {
+      console.log(key);
 
-    fetchConfig();
-  }, [servername]);
+    })
+    return parsedConfig
+  }
 
-  return <Typography className={classes.root}>All Config</Typography>;
+  return (
+    <Typography className={classes.root}>
+      {parseConfig(config)}
+    </Typography>
+  );
 }
 
 ServerConfig.propTypes = {
-  server: PropTypes.string
+  config: PropTypes.object,
 };
 
 export default ServerConfig;

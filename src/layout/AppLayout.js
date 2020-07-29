@@ -35,6 +35,10 @@ function AppLayout() {
           path="/app/settings"
           component={() => <Landing page="Settings" />}
         />
+        <Route
+          path="/app/account"
+          component={() => <Landing page="Account" />}
+        />
     </React.Fragment>
   );
 }

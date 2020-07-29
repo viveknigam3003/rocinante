@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { AccordionDetails, makeStyles, Button } from "@material-ui/core";
+import { AccordionDetails, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
     root: {

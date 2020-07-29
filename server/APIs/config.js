@@ -41,7 +41,7 @@ async function delConfig(certlocation, server, token, payload) {
     })
     .then((res) => {
       console.log(`[INFO] Deleted ${section}.${option} on ${server.name}`);
-      console.log(`[INFO] Response from server: ${res}`);
+      console.log(res.data);
     });
 }
 

@@ -8,10 +8,23 @@ import AppLayout from "./layout/AppLayout";
 import { AuthContext } from "./components/Authentication/AuthContext";
 import { authTokensPresent } from "./components/Utils/User";
 import PrivateRoute from "./components/Authentication/PrivateRoute";
+import { refreshToken } from "./components/Utils/Tokens";
 
 function App() {
   const existingToken = authTokensPresent();
   const [authToken, setAuthToken] = useState(existingToken);
+
+  React.useEffect(() => {
+    try {
+      setInterval(() => {
+        refreshToken();
+        setAuthToken(existingToken);
+        console.log(`Token Refreshed! ${Date()}` );
+      }, 55 * 60 * 1000);
+    } catch (e) {
+      console.log(e);
+    }
+  }, [setAuthToken, existingToken]);
 
   return (
     <AuthContext.Provider value={{ authToken, setAuthToken }}>

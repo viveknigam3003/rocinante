@@ -21,7 +21,7 @@ function ToolbarOptions() {
       <IconButton className={classes.optionIcon}>
         <NotificationsIcon />
       </IconButton>
-      <IconButton className={classes.optionIcon}>
+      <IconButton className={classes.optionIcon} href="#app/account">
         <AccountCircleIcon />
       </IconButton>
     </div>

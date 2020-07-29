@@ -1,8 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/core";
 import Explore from "./Explore";
 import { Redirect } from "react-router-dom";
 import Settings from "./Settings";
+import Account from "./Account";
 
 const useStyles = makeStyles((theme) => ({
   content: {
@@ -41,6 +43,8 @@ function RenderLayout(props) {
         return <div />;
       case "Settings":
         return <Settings />;
+      case "Account":
+        return <Account />;
       default:
         return <Redirect to="/" />;
     }
@@ -56,6 +60,11 @@ function RenderLayout(props) {
       </div>
     </React.Fragment>
   );
+}
+
+RenderLayout.propTypes = {
+  page: PropTypes.string,
+  drawerWidth: PropTypes.number
 }
 
 export default RenderLayout;

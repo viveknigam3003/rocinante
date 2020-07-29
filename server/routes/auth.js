@@ -16,7 +16,7 @@ router.post("/login/userpass", async (req, res) => {
     return;
   }
 
-  let attemptStatus = [];
+  const attemptStatus = [];
 
   for (let i = 0; i < credentials.length; i++) {
     try {

@@ -20,7 +20,7 @@ function App() {
         refreshToken();
         setAuthToken(existingToken);
         console.log(`Token Refreshed! ${Date()}` );
-      }, 60 * 60 * 1000);
+      }, 55 * 60 * 1000);
     } catch (e) {
       console.log(e);
     }

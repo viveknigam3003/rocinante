@@ -1,26 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import Landing from "../components/Common/Landing";
-import { refreshToken } from "../components/Utils/Tokens";
-import { authTokensPresent } from "../components/Utils/User";
-import { useAuth } from "../components/Authentication/AuthContext";
 
 function AppLayout() {
-  const { setAuthToken } = useAuth();
-  const authTokens = authTokensPresent()
-
-  React.useEffect(() => {
-    try {
-      setInterval(() => {
-        refreshToken();
-        setAuthToken(authTokens);
-        console.log(`Token Refreshed! ${Date()}` );
-      }, 58 * 60 * 1000);
-    } catch (e) {
-      console.log(e);
-    }
-  }, [setAuthToken, authTokens]);
-
   return (
     <React.Fragment>
         <Route
@@ -34,6 +16,10 @@ function AppLayout() {
         <Route
           path="/app/settings"
           component={() => <Landing page="Settings" />}
+        />
+        <Route
+          path="/app/account"
+          component={() => <Landing page="Account" />}
         />
     </React.Fragment>
   );

@@ -4,10 +4,11 @@ import {
   makeStyles,
   AccordionSummary,
   Typography,
-  Button,
 } from "@material-ui/core";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
 import AccountDetails from "./AccountDetails";
+import AccountDetailsForm from "./AccountDetailsForm";
+import AccountEditButtons from "./AccountEditButtons";
 const useStyles = makeStyles({
   root: {
     fontFamily: "Cern",
@@ -16,17 +17,14 @@ const useStyles = makeStyles({
     fontSize: 16,
     width: "50%",
   },
-  editBtn: {
-    margin : 20,
-    marginTop: 0
-  }
+ 
 });
 
 function AccountConfig() {
   const classes = useStyles();
   const [expanded, setExpanded] = useState(false);
   const [details, showDetails] = useState(false);
-  const [editMode, setEditMode] = useState(false)
+  const [editSection, setEditSection] = useState(null);
   const allAccounts = JSON.parse(localStorage.getItem("Accounts"));
   let key = 0;
 
@@ -52,8 +50,17 @@ function AccountConfig() {
               {account.account}
             </Typography>
           </AccordionSummary>
-          <AccountDetails details={account} />
-          <Button onClick={() => setEditMode(true)} size="small" color="primary" variant="outlined" className={classes.editBtn}>Edit</Button>
+          {index === editSection ? (
+            <React.Fragment>
+              <AccountDetails details={account} editMode={true} />
+              <AccountEditButtons editMode={true} save={() => console.log("Save Clicked")} cancel={() => setEditSection(null)} />
+            </React.Fragment>
+          ) : (
+            <React.Fragment>
+              <AccountDetails details={account} />
+              <AccountEditButtons editMode={false} setEdit={() => setEditSection(index)}/>
+            </React.Fragment>
+          )}
         </Accordion>
       ))}
     </div>

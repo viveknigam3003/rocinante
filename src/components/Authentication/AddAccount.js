@@ -14,7 +14,10 @@ function AddAccount() {
   const [rucioHost, setRucioHost] = useState("");
   const [authHost, setAuthHost] = useState("");
   const [certlocation, setCertlocation] = useState("");
+  const [clientcert, setClientcert] = useState();
+  const [clientkey, setClientkey] = useState();
   const [mountpoint, setMountpoint] = useState("");
+  const [authtype, setAuthtype] = useState("");
 
   function nextStep() {
     const newStep = step;
@@ -35,7 +38,10 @@ function AddAccount() {
       rucioHost,
       authHost,
       certlocation,
-      mountpoint
+      clientkey,
+      clientcert,
+      mountpoint,
+      authtype
     );
   }
 
@@ -50,6 +56,12 @@ function AddAccount() {
           setUsername={setUsername}
           password={password}
           setPassword={setPassword}
+          authtype={authtype}
+          setAuthtype={setAuthtype}
+          clientcert={clientcert}
+          setClientcert={setClientcert}
+          clientkey={clientkey}
+          setClientkey={setClientkey}
         />
       );
     case 2:

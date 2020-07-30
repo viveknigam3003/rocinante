@@ -21,15 +21,15 @@ export function getFileMetadata(filePath) {
   const currentAccountConfig = getCurrentAccountConfig(pathObject.server);
   
   const payload = {
-    certlocation: currentAccountConfig.certlocation,
-    serverHost: currentAccountConfig.server.host,
+    certlocation: currentAccountConfig.ca_cert,
+    serverHost: currentAccountConfig.rucio_host,
     scope: pathObject.scope,
     did: pathObject.did,
     token: "",
   };
 
   try {
-    payload.token = cookies.get(currentAccountConfig.server.name);
+    payload.token = cookies.get(currentAccountConfig.server_name);
   } catch (err) {
     return "No Token Found!";
   }

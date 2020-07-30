@@ -9,15 +9,22 @@ const cookies = new Cookies();
  */
 export async function getConfig(server) {
   const currentAccountConfig = getCurrentAccountConfig(server);
+  const serverObj = {
+    name: currentAccountConfig.server_name,
+    host: currentAccountConfig.rucio_host,
+    auth: currentAccountConfig.auth_host
+  }
   
+  console.log(currentAccountConfig)
+
   const payload = {
-    certlocation: currentAccountConfig.certlocation,
-    server: currentAccountConfig.server,
+    certlocation: currentAccountConfig.ca_cert,
+    server: serverObj,
     token: "",
   };
 
   try {
-    payload.token = cookies.get(currentAccountConfig.server.name);
+    payload.token = cookies.get(currentAccountConfig.server_name);
   } catch (err) {
     return 401;
   }

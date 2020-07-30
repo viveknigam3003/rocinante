@@ -8,7 +8,7 @@ export function getAllServersByNames() {
   const serverNames = [];
   const accounts = JSON.parse(localStorage.getItem("Accounts"));
   for (let i = 0; i < accounts.length; i++){
-    const name = accounts[i].server.name;
+    const name = accounts[i].server_name;
     serverNames.push(name);
   }
 

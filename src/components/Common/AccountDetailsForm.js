@@ -25,7 +25,7 @@ function AccountDetailsForm(props) {
 
 AccountDetailsForm.propTypes = {
   keyValue: PropTypes.string,
-  value: PropTypes.string,
+  value: PropTypes.any,
 };
 
 export default AccountDetailsForm;

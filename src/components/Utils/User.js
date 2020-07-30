@@ -1,6 +1,5 @@
 import { Cookies } from "react-cookie";
 import { getAllServersByNames } from "./Servers";
-import { getAvailableTokens } from "./Tokens";
 const cookies = new Cookies();
 
 /**
@@ -62,19 +61,25 @@ export function addNewAccountConfig(
   hostserver,
   authserver,
   certlocation,
-  mountppoint
+  clientkey,
+  clientcert,
+  mountpoint,
+  authtype
 ) {
   const newAccountConfig = {
     account: account,
     username: username,
     password: password,
-    server: {
-      name: servername,
-      host: hostserver,
-      auth: authserver,
-    },
-    certlocation: certlocation,
-    mountpoint: mountppoint,
+    server_name: servername,
+    rucio_host: hostserver,
+    auth_host: authserver,
+    ca_cert: certlocation,
+    client_cert: clientcert,
+    client_key: clientkey,
+    mountpoint: mountpoint,
+    auth_type: authtype,
+    client_x509_proxy: '$X509_USER_PROXY',
+    request_retries: 3
   };
 
   try {
@@ -97,35 +102,11 @@ export function getCurrentAccountConfig(servername = "") {
   const currentUser = getCurrentUser();
   for (let i = 0; i < accountConfigs.length; i++) {
     if (
-      servername === accountConfigs[i].server.name &&
+      servername === accountConfigs[i].server_name &&
       currentUser.account === accountConfigs[i].account
     )
       return accountConfigs[i];
   }
 
   return {};
-}
-
-/**
- * Returns an array of all the Authenticated Users with Available tokens
- */
-export function findAuthenticatedAccounts() {
-  const servers = JSON.parse(localStorage.getItem("servers"));
-  const accounts = JSON.parse(localStorage.getItem("Accounts"));
-  const tokens = getAvailableTokens();
-  var authenticatedAccounts = [];
-
-  for (var i = 0; i < tokens.length; i++) {
-    for (var j = 0; j < servers.length; j++) {
-      if (tokens[i].servername === servers[j].name) {
-        const account = {
-          server: { ...servers[j] },
-          account: { ...accounts[j] },
-          token: { ...tokens[i] },
-        };
-        authenticatedAccounts.push(account);
-      }
-    }
-  }
-  return authenticatedAccounts;
 }

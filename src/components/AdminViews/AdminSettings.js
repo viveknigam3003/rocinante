@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     paddingTop: 10,
     paddingBottom: 10,
     fontFamily: "Cern",
+    overflow: "auto"
   },
   title: {
     fontSize: 14,

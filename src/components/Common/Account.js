@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     width: "inherit",
     textAlign: "left",
     fontFamily: "Cern",
+    overflow: "auto"
   },
   title: {
     fontSize: 32,

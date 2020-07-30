@@ -32,7 +32,7 @@ export async function refreshToken() {
     configs: JSON.parse(localStorage.getItem("Accounts")),
   };
 
-  return axios.post("/login/userpass", {
+  return axios.post("/login", {
     payload,
     headers: {
       "Content-Type": "application/json",

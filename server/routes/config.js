@@ -10,7 +10,7 @@ router.post("/config", async (req, res) => {
       res.send(config.data);
     })
     .catch((err) => {
-      console.log(`[ERROR] ` + err);
+      console.log(`[ERROR: /getconfig] ` + err);
       res.sendStatus(401);
     });
 });
@@ -26,7 +26,7 @@ router.post("/addconfig", async (req, res) => {
   )
     .then(() => res.sendStatus(200))
     .catch((err) => {
-      console.log(`[ERROR] ${err}`);
+      console.log(`[ERROR: /addconfig] ${err}`);
       res.sendStatus(500);
     });
 });
@@ -42,7 +42,7 @@ router.post("/delconfig", async (req, res) => {
   )
     .then(() => res.sendStatus(200))
     .catch((err) => {
-      console.log(`[ERROR] ${err}`);
+      console.log(`[ERROR: /delconfig] ${err}`);
       res.sendStatus(401);
     });
 });

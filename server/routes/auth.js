@@ -1,16 +1,13 @@
 const express = require("express");
 const getTokenWithUserpass = require("../APIs/authUserpass");
-const {
-  validateAccount,
-  currentUserAuthenticated,
-} = require("../utils/accounts");
+const utils = require("../utils/accounts");
 const router = express.Router();
 
 router.post("/login/userpass", async (req, res) => {
   const credentials = req.body.payload.configs;
   const currentUser = req.body.payload.currentUser;
 
-  if (!validateAccount(currentUser, credentials)) {
+  if (!utils.validateAccount(currentUser, credentials)) {
     res.sendStatus(401);
     console.log(`[INFO] Invalid Credentials for: ${currentUser.account}`);
     return;
@@ -48,7 +45,7 @@ router.post("/login/userpass", async (req, res) => {
     return;
   }
 
-  if (currentUserAuthenticated(currentUser, attemptStatus)) {
+  if (utils.currentUserAuthenticated(currentUser, attemptStatus)) {
     res.send(attemptStatus).status(200);
   } else {
     res.sendStatus(401);

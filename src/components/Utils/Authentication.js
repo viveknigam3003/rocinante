@@ -13,7 +13,7 @@ export function loginWithUserpass(account, username, password) {
   };
 
   return axios
-    .post("/login/userpass", {
+    .post("/login", {
       payload,
       headers: {
         "Content-Type": "application/json",

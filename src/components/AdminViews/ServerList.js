@@ -58,9 +58,12 @@ function ServerList() {
   };
 
   React.useEffect(() => {
-    getConfig(server)
-      .then((res) => setConfig(res.data))
-      .catch((err) => console.log(err));
+    if (server !== "")
+      getConfig(server)
+        .then((res) => {
+          setConfig(res.data);
+        })
+        .catch((err) => console.log(err));
   }, [server]);
 
   return (
@@ -69,7 +72,9 @@ function ServerList() {
         <Accordion
           expanded={expanded === index}
           onChange={handleChange(index)}
-          onClick={() => setServer(item.server)}
+          onClick={() => {
+            setServer(item.server);
+          }}
           key={item.server}
         >
           <AccordionSummary

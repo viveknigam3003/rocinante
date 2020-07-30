@@ -1,21 +1,26 @@
 const fs = require("fs");
 
+/**
+ * Returns the list of files/folders inside a Directory.
+ * @param {String} folder Path to file
+ * @param {String} mountpoint Mountpoint for Rucio FUSE system
+ */
 function getFiles(folder, mountpoint = "/ruciofs") {
   let list = [{ name: "." }, { name: ".." }];
-  let files = [];
-  let folders = [];
+  const files = [];
+  const folders = [];
 
   if (fs.statSync(folder).isFile()) return "FILE";
   if (folder === mountpoint) list = [];
 
   try {
     fs.readdirSync(folder).forEach((file) => {
-      let statsObj = fs.statSync(folder + "/" + file);
+      const statsObj = fs.statSync(folder + "/" + file);
       statsObj.isFile()
         ? files.push({ name: file, type: "FILE" })
         : folders.push({ name: file, type: "FOLDER" });
     });
-  } catch {
+  } catch (err) {
     console.log(`[INFO] Folder not found at ${folder}`);
     return null;
   }

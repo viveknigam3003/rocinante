@@ -2,6 +2,12 @@ const axios = require("axios");
 const https = require("https");
 const fs = require("fs");
 
+/**
+ * Gets all the Server Config sections object from the Rucio Server.
+ * @param {String} certlocation
+ * @param {{name: String, host: String, auth: String}} server
+ * @param {String} token
+ */
 async function getAllConfig(certlocation, server, token) {
   const httpsAgent = new https.Agent({ ca: fs.readFileSync(certlocation) });
   return axios
@@ -12,8 +18,18 @@ async function getAllConfig(certlocation, server, token) {
     .then(console.log(`[INFO] Config received for ${server.name}`));
 }
 
+/**
+ * Attempts to add an `option` with a `value` in a `section` on Rucio Server
+ * @param {String} certlocation
+ * @param {{name: String, host: String, auth: String}} server
+ * @param {String} token
+ * @param {{section: String, option: String, value: any}} payload
+ */
 async function addConfig(certlocation, server, token, payload) {
-  const httpsAgent = new https.Agent({ ca: fs.readFileSync(certlocation), rejectUnauthorized: false });
+  const httpsAgent = new https.Agent({
+    ca: fs.readFileSync(certlocation),
+    rejectUnauthorized: false,
+  });
   const section = payload.section;
   const option = payload.option;
   const value = payload.value;
@@ -29,6 +45,13 @@ async function addConfig(certlocation, server, token, payload) {
     });
 }
 
+/**
+ *  Attempts to DELETE an `option` in a `section` on Rucio Server
+ * @param {String} certlocation 
+ * @param {{name: String, host: String, auth: String}} server
+ * @param {String} token 
+ * @param {{section: String, option: String, value: any}} payload
+ */
 async function delConfig(certlocation, server, token, payload) {
   const httpsAgent = new https.Agent({ ca: fs.readFileSync(certlocation) });
   const section = payload.section;

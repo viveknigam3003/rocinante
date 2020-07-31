@@ -33,18 +33,11 @@ function AccountDetails(props) {
       {Object.keys(account).map((config) => (
         <div className={classes.item} key={++key}>
           {props.editMode ? (
-            <AccountDetailsForm
-              keyValue={config}
-              value={
-                config === "server" ? account[config].name : account[config]
-              }
-            />
+            <AccountDetailsForm keyValue={config} value={account[config]} />
           ) : (
             <React.Fragment>
               <div className={classes.option}>{config}</div>
-              <div className={classes.value}>
-                {config === "server" ? account[config].name : account[config]}
-              </div>
+              <div className={classes.value}>{account[config]}</div>
             </React.Fragment>
           )}
         </div>

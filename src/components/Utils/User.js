@@ -1,4 +1,5 @@
 import { Cookies } from "react-cookie";
+import axios from "axios";
 import { getAllServersByNames } from "./Servers";
 const cookies = new Cookies();
 
@@ -78,18 +79,20 @@ export function addNewAccountConfig(
     client_key: clientkey,
     mountpoint: mountpoint,
     auth_type: authtype,
-    client_x509_proxy: '$X509_USER_PROXY',
-    request_retries: 3
+    client_x509_proxy: "$X509_USER_PROXY",
+    request_retries: 3,
   };
 
   try {
     const accountConfigs = JSON.parse(localStorage.getItem("Accounts"));
     accountConfigs.push(newAccountConfig);
     localStorage.setItem("Accounts", JSON.stringify(accountConfigs));
+    saveUserConfigs(servername + ".cfg", "client", newAccountConfig);
   } catch (err) {
     const accountConfigs = [];
     accountConfigs.push(newAccountConfig);
     localStorage.setItem("Accounts", JSON.stringify(accountConfigs));
+    saveUserConfigs(servername + ".cfg", "client", newAccountConfig);
   }
 }
 
@@ -109,4 +112,10 @@ export function getCurrentAccountConfig(servername = "") {
   }
 
   return {};
+}
+
+export function saveUserConfigs(filepath, block, params) {
+  const payload = { filepath: filepath, block: block, params: params };
+
+  return axios.post("/savecfg", { payload });
 }

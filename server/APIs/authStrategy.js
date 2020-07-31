@@ -4,9 +4,9 @@ const fs = require("fs");
 
 /**
  * Attempts to get RUCIO_AUTH_TOKEN for a server using USERPASS Strategy.
- * @param {Request} req 
- * @param {Response} res 
- * @param {Object} credentials 
+ * @param {Request} req
+ * @param {Response} res
+ * @param {Object} credentials
  */
 async function getTokenWithUserpass(req, res, credentials) {
   const httpsAgent = new https.Agent({
@@ -36,9 +36,9 @@ async function getTokenWithUserpass(req, res, credentials) {
 
 /**
  * Attempts to get RUCIO_AUTH_TOKEN for a server using USERPASS Strategy.
- * @param {Request} req 
- * @param {Response} res 
- * @param {Object} credentials 
+ * @param {Request} req
+ * @param {Response} res
+ * @param {Object} credentials
  */
 async function getTokenWithX509(req, res, credentials) {
   const httpsAgent = new https.Agent({
@@ -67,4 +67,4 @@ async function getTokenWithX509(req, res, credentials) {
     });
 }
 
-module.exports = {getTokenWithUserpass, getTokenWithX509};
+module.exports = { getTokenWithUserpass, getTokenWithX509 };

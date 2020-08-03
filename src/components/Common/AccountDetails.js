@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { AccordionDetails, makeStyles } from "@material-ui/core";
 import AccountDetailsForm from "./AccountDetailsForm";
+import { getAccountConfig, updateConfig } from "../Utils/User";
+import AccountEditButtons from "./AccountEditButtons";
 
 const useStyles = makeStyles({
   root: {
@@ -26,14 +28,32 @@ const useStyles = makeStyles({
 function AccountDetails(props) {
   const classes = useStyles();
   const account = props.details;
+  const [config, index] = getAccountConfig(
+    account.account,
+    account.server_name
+  );
   let key = 0;
+
+  const handleChange = (e) => {
+    console.log(config);
+    config[e.target.id] = e.target.value;
+  };
+
+  const handleSave = (e) => {
+    e.preventDefault()
+    updateConfig(config, index).then(console.log("Settings Saved"));
+  };
 
   return (
     <AccordionDetails className={classes.root}>
       {Object.keys(account).map((config) => (
         <div className={classes.item} key={++key}>
           {props.editMode ? (
-            <AccountDetailsForm keyValue={config} value={account[config]} />
+            <AccountDetailsForm
+              onChange={(e) => handleChange(e)}
+              keyValue={config}
+              value={account[config]}
+            />
           ) : (
             <React.Fragment>
               <div className={classes.option}>{config}</div>
@@ -42,6 +62,15 @@ function AccountDetails(props) {
           )}
         </div>
       ))}
+      {props.editMode ? (
+        <AccountEditButtons
+          editMode={props.editMode}
+          save={(e) => handleSave(e)}
+          cancel={() => props.cancel()}
+        />
+      ) : (
+        <AccountEditButtons editMode={false} setEdit={() => props.setEdit()} />
+      )}
     </AccordionDetails>
   );
 }
@@ -49,6 +78,8 @@ function AccountDetails(props) {
 AccountDetails.propTypes = {
   editMode: PropTypes.bool,
   details: PropTypes.object,
+  cancel: PropTypes.func,
+  setEdit: PropTypes.func,
 };
 
 export default AccountDetails;

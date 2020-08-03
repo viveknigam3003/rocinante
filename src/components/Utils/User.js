@@ -98,27 +98,37 @@ export function addNewAccountConfig(
 
 /**
  * Returns the current account config by `account` and `server_name`
- * @param {String} account 
- * @param {String} server 
+ * @param {String} account
+ * @param {String} server
  */
-export function getAccountConfig(account, server){
+export function getAccountConfig(account, server) {
   const allConfigs = JSON.parse(localStorage.getItem("Accounts"));
-  for (let i = 0; i< allConfigs.length; i ++){
-    if (account === allConfigs[i].account && server === allConfigs[i].server_name)
+  for (let i = 0; i < allConfigs.length; i++) {
+    if (
+      account === allConfigs[i].account &&
+      server === allConfigs[i].server_name
+    ) {
       return [allConfigs[i], i];
+    }
   }
 
   return false;
 }
 
-export async function updateConfig(params){
-  const {config, index} = getAccountConfig(params.account, params.server_name);
+/**
+ * Persists the `params` Object containing configuration at `index` in LocalStorage
+ * @param {Object} params 
+ * @param {number} index 
+ */
+export async function updateConfig(params, index) {
   const accounts = JSON.parse(localStorage.getItem("Accounts"));
-  try{
-    accounts.splice(index, index, config);
-    return true
+  try {
+    accounts.splice(index, 1, params);
+    console.log(accounts)
+    localStorage.setItem("Accounts", JSON.stringify(accounts))
+    return true;
   } catch (err) {
-    return false
+    return false;
   }
 }
 

@@ -7,7 +7,6 @@ import {
 } from "@material-ui/core";
 import ExpandIcon from "@material-ui/icons/ExpandMore";
 import AccountDetails from "./AccountDetails";
-import AccountEditButtons from "./AccountEditButtons";
 const useStyles = makeStyles({
   root: {
     fontFamily: "Cern",
@@ -50,22 +49,16 @@ function AccountConfig() {
             </Typography>
           </AccordionSummary>
           {index === editSection ? (
-            <React.Fragment>
-              <AccountDetails details={account} editMode={true} />
-              <AccountEditButtons
-                editMode={true}
-                save={() => console.log("Save Clicked")}
-                cancel={() => setEditSection(null)}
-              />
-            </React.Fragment>
+            <AccountDetails
+              details={account}
+              editMode={true}
+              cancel={() => setEditSection(null)}
+            />
           ) : (
-            <React.Fragment>
-              <AccountDetails details={account} />
-              <AccountEditButtons
-                editMode={false}
-                setEdit={() => setEditSection(index)}
-              />
-            </React.Fragment>
+            <AccountDetails
+              details={account}
+              setEdit={() => setEditSection(index)}
+            />
           )}
         </Accordion>
       ))}

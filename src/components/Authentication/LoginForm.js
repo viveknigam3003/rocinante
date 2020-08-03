@@ -64,13 +64,14 @@ function LoginForm(props) {
       .then(() => {
         setLoading(loading ? false : null);
         saveCurrentUser(account, username, password);
-        dispatch({type: "SUCCESS"});
+        dispatch({ type: "SUCCESS" });
+        dispatch({type: "SHOW_SNACKBAR"});
       })
       .catch((err) => {
         setLoading(loading ? false : null);
         const errorcode = Number(err.toString().split(" ").pop());
-        if (errorcode === 401) dispatch({type: "UNAUTHORIZED"});
-        else if (errorcode === 500) dispatch({type: "SERVER_ERR"});
+        if (errorcode === 401) {dispatch({ type: "UNAUTHORIZED" }); dispatch({type: "SHOW_SNACKBAR"})}
+        else if (errorcode === 500) {dispatch({ type: "SERVER_ERR" }); dispatch({type: "SHOW_SNACKBAR"})}
         else console.log(err);
       });
   }
@@ -91,10 +92,7 @@ function LoginForm(props) {
             Login with {props.privilege} rights
           </div>
         </div>
-        <LoginInput
-          loading={loading}
-          handleSubmit={handleSubmit}
-        />
+        <LoginInput loading={loading} handleSubmit={handleSubmit} />
         <LoginSnackbar />
       </div>
     </React.Fragment>

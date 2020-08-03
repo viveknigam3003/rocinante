@@ -10,7 +10,6 @@ function LoginSnackbar() {
     case 200:
       return (
         <AlertSnackbar
-          open={true}
           severity="success"
           message="Signed in to Rucio"
           onExited={() => dispatch({ type: "LOG_IN" })}
@@ -19,7 +18,6 @@ function LoginSnackbar() {
     case 401:
       return (
         <AlertSnackbar
-          open={true}
           severity="error"
           message="Invalid Credentials"
         />
@@ -27,7 +25,6 @@ function LoginSnackbar() {
     case 500:
       return (
         <AlertSnackbar
-          open={true}
           severity="error"
           message="Connection Error"
         />

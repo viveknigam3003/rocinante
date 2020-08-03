@@ -4,6 +4,7 @@ import { AccordionDetails, makeStyles } from "@material-ui/core";
 import AccountDetailsForm from "./AccountDetailsForm";
 import { getAccountConfig, updateConfig } from "../Utils/User";
 import AccountEditButtons from "./AccountEditButtons";
+import { useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
@@ -28,6 +29,7 @@ const useStyles = makeStyles({
 function AccountDetails(props) {
   const classes = useStyles();
   const account = props.details;
+  const dispatch = useDispatch();
   const [config, index] = getAccountConfig(
     account.account,
     account.server_name
@@ -35,13 +37,12 @@ function AccountDetails(props) {
   let key = 0;
 
   const handleChange = (e) => {
-    console.log(config);
     config[e.target.id] = e.target.value;
   };
 
   const handleSave = (e) => {
     e.preventDefault()
-    updateConfig(config, index).then(console.log("Settings Saved"));
+    updateConfig(config, index).then(() => dispatch({type: "SHOW_SNACKBAR"}));
   };
 
   return (

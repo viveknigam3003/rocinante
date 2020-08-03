@@ -2,13 +2,15 @@ import React from "react";
 import { makeStyles } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
 import AccountConfig from "./AccountList";
+import AlertSnackbar from "../Utils/Snackbar";
+import { useSelector, useDispatch } from "react-redux";
 
 const useStyles = makeStyles({
   root: {
     width: "inherit",
     textAlign: "left",
     fontFamily: "Cern",
-    overflow: "auto"
+    overflow: "auto",
   },
   title: {
     fontSize: 32,
@@ -33,6 +35,8 @@ const useStyles = makeStyles({
 function Account() {
   const classes = useStyles();
   const account = localStorage.getItem("CURR_ACCOUNT");
+  const storeState = useSelector((state) => state);
+  const dispatch = useDispatch();
 
   return (
     <div id="account-root" className={classes.root}>
@@ -44,6 +48,12 @@ function Account() {
         <div className={classes.hint}>all accounts</div>
         <AccountConfig />
       </div>
+      <AlertSnackbar
+        message="Settings Saved"
+        severity="success"
+        open={storeState.snackbar}
+        onExited={() => dispatch({type: "HIDE_SNACKBAR"})}
+      />
     </div>
   );
 }

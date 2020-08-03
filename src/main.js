@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require("electron");
+const path = require('path')
 
-let window = undefined;
+let window;
 
 app.on("ready", () => {
   createWindow();
@@ -20,6 +21,7 @@ const createWindow = () => {
     webPreferences: {
       backgroundThrottling: false,
     },
+    icon: path.join(__dirname, 'layout/ruciosq.png')
   });
 
   window.loadURL("http://localhost:3005");

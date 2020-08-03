@@ -97,6 +97,32 @@ export function addNewAccountConfig(
 }
 
 /**
+ * Returns the current account config by `account` and `server_name`
+ * @param {String} account 
+ * @param {String} server 
+ */
+export function getAccountConfig(account, server){
+  const allConfigs = JSON.parse(localStorage.getItem("Accounts"));
+  for (let i = 0; i< allConfigs.length; i ++){
+    if (account === allConfigs[i].account && server === allConfigs[i].server_name)
+      return [allConfigs[i], i];
+  }
+
+  return false;
+}
+
+export async function updateConfig(params){
+  const {config, index} = getAccountConfig(params.account, params.server_name);
+  const accounts = JSON.parse(localStorage.getItem("Accounts"));
+  try{
+    accounts.splice(index, index, config);
+    return true
+  } catch (err) {
+    return false
+  }
+}
+
+/**
  * Takes in servername and returns the current account's config file corresponding to the server.
  * @param {String} servername
  */

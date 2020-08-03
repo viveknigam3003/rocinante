@@ -1,12 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { ButtonGroup, Button, makeStyles } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 
 const useStyles = makeStyles({
   editBtn: {
     margin: 20,
-    marginTop: 0,
-    marginRight: 10,
+    marginLeft: 10
   },
 });
 
@@ -15,14 +14,14 @@ function AccountEditButtons(props) {
   switch (props.editMode) {
     case true:
       return (
-        <ButtonGroup className={classes.editBtn}>
-          <Button onClick={props.save} color="primary" variant="outlined">
+        <div>
+          <Button className={classes.editBtn} size="small" onClick={props.save} color="primary" variant="outlined">
             Save
           </Button>
-          <Button onClick={props.cancel} color="secondary" variant="outlined">
+          <Button className={classes.editBtn} size="small" onClick={props.cancel} color="secondary" variant="outlined">
             Cancel
           </Button>
-        </ButtonGroup>
+        </div>
       );
     default:
       return (

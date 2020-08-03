@@ -79,7 +79,7 @@ function ServerConfig(props) {
                       {option}
                     </div>
                     <div id="option-value" className={classes.optionValue}>
-                      {config[section][option]}
+                      {config[section][option].toString()}
                     </div>
                   </React.Fragment>
                 )}

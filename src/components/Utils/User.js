@@ -124,7 +124,6 @@ export async function updateConfig(params, index) {
   const accounts = JSON.parse(localStorage.getItem("Accounts"));
   try {
     accounts.splice(index, 1, params);
-    console.log(accounts)
     localStorage.setItem("Accounts", JSON.stringify(accounts))
     return true;
   } catch (err) {

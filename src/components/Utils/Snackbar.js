@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
+import { useSelector, useDispatch } from "react-redux";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} action={null} />;
@@ -24,13 +25,14 @@ const useStyles = makeStyles((theme) => ({
  */
 export default function AlertSnackbar(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(props.open);
+  const storeState = useSelector(state => state);
+  const dispatch = useDispatch();
 
-  const handleClose = () => setOpen(false);
+  const handleClose = () => {dispatch({type: "HIDE_SNACKBAR"})};
 
   return (
     <div className={classes.root}>
-      <Snackbar open={open} autoHideDuration={2000} onClose={handleClose} onExited={props.onExited}>
+      <Snackbar open={storeState.snackbar} autoHideDuration={2000} onClose={handleClose} onExited={props.onExited}>
         <Alert onClose={handleClose} severity={props.severity}>
           {props.message}
         </Alert>

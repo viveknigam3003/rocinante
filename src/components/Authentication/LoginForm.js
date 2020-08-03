@@ -65,14 +65,18 @@ function LoginForm(props) {
         setLoading(loading ? false : null);
         saveCurrentUser(account, username, password);
         dispatch({ type: "SUCCESS" });
-        dispatch({type: "SHOW_SNACKBAR"});
+        dispatch({ type: "SHOW_SNACKBAR" });
       })
       .catch((err) => {
         setLoading(loading ? false : null);
         const errorcode = Number(err.toString().split(" ").pop());
-        if (errorcode === 401) {dispatch({ type: "UNAUTHORIZED" }); dispatch({type: "SHOW_SNACKBAR"})}
-        else if (errorcode === 500) {dispatch({ type: "SERVER_ERR" }); dispatch({type: "SHOW_SNACKBAR"})}
-        else console.log(err);
+        if (errorcode === 401) {
+          dispatch({ type: "UNAUTHORIZED" });
+          dispatch({ type: "SHOW_SNACKBAR" });
+        } else if (errorcode === 500) {
+          dispatch({ type: "SERVER_ERR" });
+          dispatch({ type: "SHOW_SNACKBAR" });
+        } else console.log(err);
       });
   }
 

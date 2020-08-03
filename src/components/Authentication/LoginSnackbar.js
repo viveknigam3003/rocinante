@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 function LoginSnackbar() {
   const dispatch = useDispatch();
-  const storeState = useSelector((state) => state)
+  const storeState = useSelector((state) => state);
 
   switch (storeState.status) {
     case 200:
@@ -16,19 +16,9 @@ function LoginSnackbar() {
         />
       );
     case 401:
-      return (
-        <AlertSnackbar
-          severity="error"
-          message="Invalid Credentials"
-        />
-      );
+      return <AlertSnackbar severity="error" message="Invalid Credentials" />;
     case 500:
-      return (
-        <AlertSnackbar
-          severity="error"
-          message="Connection Error"
-        />
-      );
+      return <AlertSnackbar severity="error" message="Connection Error" />;
     default:
       return null;
   }

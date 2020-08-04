@@ -6,7 +6,7 @@ import LogoDark from "../../layout/LogoDark";
 import LoginInput from "./LoginInput";
 import LoginSnackbar from "./LoginSnackbar";
 import { useAuth } from "./AuthContext";
-import { loginWithUserpass } from "../Utils/Authentication";
+import { login } from "../Utils/Authentication";
 import { authTokensPresent, saveCurrentUser } from "../Utils/User";
 import { Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
@@ -56,11 +56,11 @@ function LoginForm(props) {
   /**
    * Handles the Login event on form submit.
    */
-  function handleSubmit(event, account, username, password) {
+  function handleSubmit(event, authtype, account, username, password) {
     if (loading) return;
     event.preventDefault();
     setLoading(true);
-    loginWithUserpass(account, username, password)
+    login(authtype, account, username, password)
       .then(() => {
         setLoading(loading ? false : null);
         saveCurrentUser(account, username, password);

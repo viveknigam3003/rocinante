@@ -1,11 +1,12 @@
 /**
  * Validates the current user from the list of stored credentials
- * @param {{account: String, username: String, password: String}} currentUser
+ * @param {Object} currentUser
  * @param {Object} credentials
  */
-function validateAccount(currentUser, credentials) {
+function validateAccount(currentUser, credentials, authtype) {
   for (let i = 0; i < credentials.length; i++) {
-    if (currentUser.account === credentials[i].account) return true;
+    if (currentUser.account === credentials[i].account && authtype === credentials[i].auth_type) return true;
+    // else if (currentUser.account === credentials[i].account) return true;
   }
 
   return false;

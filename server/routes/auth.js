@@ -6,8 +6,9 @@ const router = express.Router();
 router.post("/login", async (req, res) => {
   const credentials = req.body.payload.configs;
   const currentUser = req.body.payload.currentUser;
-
-  if (!utils.validateAccount(currentUser, credentials)) {
+  const authtype = req.body.payload.authtype;
+  
+  if (!utils.validateAccount(currentUser, credentials, authtype)) {
     res.sendStatus(401);
     console.log(`[INFO /login] Invalid Credentials for: ${currentUser.account}`);
     return;

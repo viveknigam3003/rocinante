@@ -1,9 +1,13 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core";
-import { grey } from "@material-ui/core/colors";
+import { makeStyles, Button } from "@material-ui/core";
+import { grey, red } from "@material-ui/core/colors";
 import AccountConfig from "./AccountList";
 import AlertSnackbar from "../Utils/Snackbar";
 import { useSelector, useDispatch } from "react-redux";
+import { purgeCurrentUser } from "../Utils/User";
+import { purgeAllTokens } from "../Utils/Tokens";
+import { Redirect } from "react-router-dom";
+import { useAuth } from "../Authentication/AuthContext";
 
 const useStyles = makeStyles({
   root: {
@@ -26,9 +30,9 @@ const useStyles = makeStyles({
     display: "flex",
     maxWidth: "50%",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
   },
-  link:{
+  link: {
     outline: "none",
     border: "none",
     color: "#3e55ab",
@@ -40,12 +44,25 @@ const useStyles = makeStyles({
     opacity: 0.8,
     paddingRight: 10,
   },
+  logoutBtn: {
+    marginTop: 10,
+    fontFamily: "Cern",
+    color: red[500],
+  },
 });
 function Account() {
   const classes = useStyles();
   const account = localStorage.getItem("CURR_ACCOUNT");
   const storeState = useSelector((state) => state);
   const dispatch = useDispatch();
+  const { setAuthToken } = useAuth();
+
+  const handleLogout = () => {
+    purgeCurrentUser();
+    purgeAllTokens();
+    setAuthToken(false);
+    return <Redirect to="#" />;
+  };
 
   return (
     <div id="account-root" className={classes.root}>
@@ -56,9 +73,22 @@ function Account() {
       <div id="other-accounts">
         <div className={classes.hint}>
           <div>all accounts</div>
-          <a className={classes.link} href="#adduser">Add New Account</a>
+          <a className={classes.link} href="#adduser">
+            Add New Account
+          </a>
         </div>
         <AccountConfig />
+      </div>
+      <div id="logout">
+        <div className={classes.hint}>Login again?</div>
+        <Button
+          className={classes.logoutBtn}
+          color="inherit"
+          variant="outlined"
+          onClick={handleLogout}
+        >
+          Logout
+        </Button>
       </div>
       <AlertSnackbar
         message="Settings Saved"

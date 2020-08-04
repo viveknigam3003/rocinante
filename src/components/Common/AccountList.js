@@ -11,7 +11,7 @@ const useStyles = makeStyles({
   root: {
     fontFamily: "Cern",
     paddingTop: 10,
-    paddingBottom: 10,
+    paddingBottom: 30,
     fontSize: 16,
     width: "50%",
   },

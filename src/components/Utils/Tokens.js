@@ -30,6 +30,7 @@ export async function refreshToken() {
   const payload = {
     currentUser: getCurrentUser(),
     configs: JSON.parse(localStorage.getItem("Accounts")),
+    authtype: JSON.parse(localStorage.getItem("authtype"))
   };
 
   return axios.post("/login", {

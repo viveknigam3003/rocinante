@@ -7,11 +7,13 @@ const cookies = new Cookies();
  * Saves the login information of the current user in local storage.
  * The info can be used to retrieve the token again when it expires.
  *
+ * @param {String} authtype "userpass" OR "x509"
  * @param {String} account
  * @param {String} username
  * @param {String} password
  */
-export function saveCurrentUser(account, username, password) {
+export function saveCurrentUser(authtype, account, username, password) {
+  localStorage.setItem("authtype", authtype);
   localStorage.setItem("CURR_ACCOUNT", account);
   localStorage.setItem("CURR_USERNAME", username);
   localStorage.setItem("CURR_PASSWORD", password);

@@ -63,7 +63,7 @@ function LoginForm(props) {
     login(authtype, account, username, password)
       .then(() => {
         setLoading(loading ? false : null);
-        saveCurrentUser(account, username, password);
+        saveCurrentUser(authtype, account, username, password);
         dispatch({ type: "SUCCESS" });
         dispatch({ type: "SHOW_SNACKBAR" });
       })

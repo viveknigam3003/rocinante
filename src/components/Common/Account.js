@@ -80,7 +80,7 @@ function Account() {
         <AccountConfig />
       </div>
       <div id="logout">
-        <div className={classes.hint}>Login again?</div>
+        <div className={classes.hint}>Back to Login page</div>
         <Button
           className={classes.logoutBtn}
           color="inherit"

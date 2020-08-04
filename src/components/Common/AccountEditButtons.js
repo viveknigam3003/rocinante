@@ -40,6 +40,7 @@ function AccountEditButtons(props) {
             color="secondary"
             variant="outlined"
             className={classes.editBtn}
+            onClick={props.confirm}
           >
             Delete Account
           </Button>
@@ -52,6 +53,7 @@ AccountEditButtons.propTypes = {
   setEdit: PropTypes.func,
   save: PropTypes.func,
   cancel: PropTypes.func,
+  confirm: PropTypes.func,
   editMode: PropTypes.bool,
 };
 

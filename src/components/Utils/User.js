@@ -117,14 +117,29 @@ export function getAccountConfig(account, server) {
 
 /**
  * Persists the `params` Object containing configuration at `index` in LocalStorage
- * @param {Object} params 
- * @param {number} index 
+ * @param {Object} params
+ * @param {number} index
  */
 export async function updateConfig(params, index) {
   const accounts = JSON.parse(localStorage.getItem("Accounts"));
   try {
     accounts.splice(index, 1, params);
-    localStorage.setItem("Accounts", JSON.stringify(accounts))
+    localStorage.setItem("Accounts", JSON.stringify(accounts));
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
+/**
+ * Deletes the Account config at `index` from Local Storage
+ * @param {number} index 
+ */
+export async function deleteConfig(index) {
+  const accounts = JSON.parse(localStorage.getItem("Accounts"));
+  try {
+    accounts.splice(index, 1);
+    localStorage.setItem("Accounts", JSON.stringify(accounts));
     return true;
   } catch (err) {
     return false;

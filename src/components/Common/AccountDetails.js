@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import { AccordionDetails, makeStyles } from "@material-ui/core";
 import AccountDetailsForm from "./AccountDetailsForm";
-import { getAccountConfig, updateConfig } from "../Utils/User";
+import { getAccountConfig, updateConfig, deleteConfig } from "../Utils/User";
 import AccountEditButtons from "./AccountEditButtons";
 import { useDispatch } from "react-redux";
+import AccountDeleteDialog from "./AccountDeleteDialog";
 
 const useStyles = makeStyles({
   root: {
@@ -34,6 +35,7 @@ function AccountDetails(props) {
     account.account,
     account.server_name
   );
+  const [open, setOpen] = React.useState(false);
   let key = 0;
 
   const handleChange = (e) => {
@@ -41,8 +43,13 @@ function AccountDetails(props) {
   };
 
   const handleSave = (e) => {
-    e.preventDefault()
-    updateConfig(config, index).then(() => dispatch({type: "SHOW_SNACKBAR"}));
+    e.preventDefault();
+    updateConfig(config, index).then(() => dispatch({ type: "SHOW_SNACKBAR" }));
+  };
+
+  const handleAccountDelete = (e) => {
+    e.preventDefault();
+    deleteConfig(index).then(() => dispatch({ type: "SHOW_SNACKBAR" })).then(() => setOpen(false));
   };
 
   return (
@@ -70,8 +77,19 @@ function AccountDetails(props) {
           cancel={() => props.cancel()}
         />
       ) : (
-        <AccountEditButtons editMode={false} setEdit={() => props.setEdit()} />
+        <AccountEditButtons
+          editMode={false}
+          setEdit={() => props.setEdit()}
+          confirm={() => setOpen(true)}
+        />
       )}
+      <AccountDeleteDialog
+        open={open}
+        handleClose={() => setOpen(false)}
+        account={account.account}
+        server={account.server_name}
+        handleConfirm={(e) => handleAccountDelete(e)}
+      />
     </AccordionDetails>
   );
 }

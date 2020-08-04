@@ -14,8 +14,6 @@ export async function getConfig(server) {
     host: currentAccountConfig.rucio_host,
     auth: currentAccountConfig.auth_host
   }
-  
-  console.log(currentAccountConfig)
 
   const payload = {
     certlocation: currentAccountConfig.ca_cert,

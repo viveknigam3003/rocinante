@@ -18,10 +18,10 @@ const useStyles = makeStyles({
     padding: 10,
   },
   option: {
-    minWidth: "20%",
+    minWidth: "30%",
   },
   value: {
-    width: "80%",
+    width: "70%",
     textAlign: "left",
   },
 });

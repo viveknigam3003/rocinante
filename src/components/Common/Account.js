@@ -22,8 +22,17 @@ const useStyles = makeStyles({
   hint: {
     fontSize: 14,
     fontWeight: 500,
-    color: "#000000",
-    opacity: 0.5,
+    color: "#808080",
+    display: "flex",
+    maxWidth: "50%",
+    justifyContent: "space-between",
+    alignItems: "center"
+  },
+  link:{
+    outline: "none",
+    border: "none",
+    color: "#3e55ab",
+    textDecoration: "none",
   },
   info: {
     fontSize: 18,
@@ -45,14 +54,17 @@ function Account() {
         <div style={{ paddingTop: 5, paddingBottom: 10 }}>{account}</div>
       </div>
       <div id="other-accounts">
-        <div className={classes.hint}>all accounts</div>
+        <div className={classes.hint}>
+          <div>all accounts</div>
+          <a className={classes.link} href="#adduser">Add New Account</a>
+        </div>
         <AccountConfig />
       </div>
       <AlertSnackbar
         message="Settings Saved"
         severity="success"
         open={storeState.snackbar}
-        onExited={() => dispatch({type: "HIDE_SNACKBAR"})}
+        onExited={() => dispatch({ type: "HIDE_SNACKBAR" })}
       />
     </div>
   );

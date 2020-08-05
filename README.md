@@ -3,7 +3,7 @@
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/viveknigam3003/rocinante/react?style=flat-square)
 ![GitHub package.json dependency version (dev dep on branch)](https://img.shields.io/github/package-json/dependency-version/viveknigam3003/rocinante/dev/electron?style=flat-square)
 
-** A Desktop GUI Client for [Rucio](https://github.com/rucio/rucio). **
+**A Desktop GUI Client for [Rucio](https://github.com/rucio/rucio).**
 
 ## Description
 

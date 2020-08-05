@@ -1,5 +1,5 @@
 # Rocinante Usage Guide
-** A Desktop GUI Client for Rucio **
+**A Desktop GUI Client for Rucio**
 
 ## Description
 

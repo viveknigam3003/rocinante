@@ -2,18 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} action={null} />;
 }
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-  },
-}));
 
 /**
  * React Component to Display Alert Messages depending on severity.
@@ -24,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
  * @property {func} onExited Function to perform when the snackbar has exited
  */
 export default function AlertSnackbar(props) {
-  const classes = useStyles();
   const storeState = useSelector((state) => state);
   const dispatch = useDispatch();
 
@@ -33,7 +25,7 @@ export default function AlertSnackbar(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <React.Fragment>
       <Snackbar
         open={storeState.snackbar}
         autoHideDuration={2000}
@@ -44,7 +36,7 @@ export default function AlertSnackbar(props) {
           {props.message}
         </Alert>
       </Snackbar>
-    </div>
+    </React.Fragment>
   );
 }
 

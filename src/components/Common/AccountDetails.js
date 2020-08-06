@@ -44,12 +44,16 @@ function AccountDetails(props) {
 
   const handleSave = (e) => {
     e.preventDefault();
-    updateConfig(config, index).then(() => dispatch({ type: "SHOW_SNACKBAR" }));
+    updateConfig(config, index)
+      .then(() => dispatch({ type: "SHOW_SNACKBAR" }))
+      .then(() => props.cancel());
   };
 
   const handleAccountDelete = (e) => {
     e.preventDefault();
-    deleteConfig(index).then(() => dispatch({ type: "SHOW_SNACKBAR" })).then(() => setOpen(false));
+    deleteConfig(index)
+      .then(() => dispatch({ type: "SHOW_SNACKBAR" }))
+      .then(() => setOpen(false));
   };
 
   return (

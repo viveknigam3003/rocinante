@@ -1,4 +1,3 @@
-
 import React from "react";
 import PropTypes from "prop-types";
 import Button from "@material-ui/core/Button";
@@ -13,59 +12,72 @@ const useStyles = makeStyles({
   form: {
     display: "flex",
     flexDirection: "column",
-  }
-})
+  },
+});
 
 function DialogNewSection(props) {
   const classes = useStyles();
   return (
-    <div>
+    <React.Fragment>
       <Dialog
         open={props.open}
         onClose={props.handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">
-          {"Add New Section"}
-        </DialogTitle>
+        <DialogTitle id="alert-dialog-title">{"Add New Section"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             Please enter Section name with at least one option and value
-            <form className={classes.form}>
-              <TextField
+          </DialogContentText>
+          <form className={classes.form}>
+            <TextField
               label="Section"
               autoFocus
-              required/>
-              <TextField
+              required
+              onChange={(e) => props.setSection(e.target.value)}
+            />
+            <TextField
               label="Option"
-              required/>
-              <TextField
+              required
+              onChange={(e) => props.setOption(e.target.value)}
+            />
+            <TextField
               label="Value"
-              required/>
-            </form>
-          </DialogContentText>
+              required
+              onChange={(e) => props.setValue(e.target.value)}
+            />
+          </form>
         </DialogContent>
         <DialogActions>
           <Button onClick={props.handleClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={props.handleSubmit} color="primary" autoFocus>
+          <Button
+            disabled={props.disabled}
+            onClick={props.handleSubmit}
+            color="primary"
+            autoFocus
+          >
             Add
           </Button>
         </DialogActions>
       </Dialog>
-    </div>
+    </React.Fragment>
   );
 }
 
 DialogNewSection.propTypes = {
+  setSection: PropTypes.func,
+  setOption: PropTypes.func,
+  setValue: PropTypes.func,
   option: PropTypes.string,
+  disabled: PropTypes.bool,
   section: PropTypes.string,
   server: PropTypes.string,
   open: PropTypes.bool,
   handleClose: PropTypes.func,
-  handleSubmit: PropTypes.func
+  handleSubmit: PropTypes.func,
 };
 
 export default DialogNewSection;

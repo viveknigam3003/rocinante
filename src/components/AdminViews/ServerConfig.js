@@ -46,7 +46,7 @@ function ServerConfig(props) {
   return (
     <AccordionDetails>
       <div className={classes.root}>
-        <ServerConfigTitle />
+        <ServerConfigTitle server={props.server}/>
         {Object.keys(config).map((section, index) => (
           <div key={section} className={classes.section}>
             <div className={classes.sectionTitle}>

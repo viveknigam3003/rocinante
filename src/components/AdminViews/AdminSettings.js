@@ -10,7 +10,6 @@ const useStyles = makeStyles({
     paddingTop: 10,
     paddingBottom: 10,
     fontFamily: "Cern",
-    overflow: "auto"
   },
   title: {
     fontSize: 14,
@@ -23,7 +22,7 @@ const useStyles = makeStyles({
 function AdminSettings() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
+    <div id="admin-settings" className={classes.root}>
       <div id="title" className={classes.title}>
         Servers
       </div>

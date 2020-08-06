@@ -61,7 +61,7 @@ function ServerList() {
     if (server !== "")
       getConfig(server)
         .then((res) => {
-          setConfig(res.data);
+          if (res.status === 200) setConfig(res.data);
         })
         .catch((err) => console.log(err));
   }, [server]);

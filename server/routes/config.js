@@ -5,7 +5,8 @@ const router = express.Router();
 router.post("/config", async (req, res) => {
   const payload = req.body.payload;
 
-  await config.getAllConfig(payload.certlocation, payload.server, payload.token)
+  await config
+    .getAllConfig(payload.certlocation, payload.server, payload.token)
     .then((config) => {
       res.send(config.data);
     })
@@ -18,28 +19,29 @@ router.post("/config", async (req, res) => {
 router.post("/addconfig", async (req, res) => {
   const payload = req.body.payload;
 
-  await config.addConfig(
-    payload.certlocation,
-    payload.server,
-    payload.token,
-    payload.values
-  )
+  await config
+    .addConfig(
+      payload.certlocation,
+      payload.server,
+      payload.token,
+      payload.values
+    )
     .then(() => res.sendStatus(200))
-    .catch((err) => {
-      console.log(`[ERROR: /addconfig] ${err}`);
-      res.sendStatus(500);
+    .catch((response) => {
+      response.status === 401 ? res.sendStatus(401) : res.sendStatus(500);
     });
 });
 
 router.post("/delconfig", async (req, res) => {
   const payload = req.body.payload;
 
-  await config.delConfig(
-    payload.certlocation,
-    payload.server,
-    payload.token,
-    payload.values
-  )
+  await config
+    .delConfig(
+      payload.certlocation,
+      payload.server,
+      payload.token,
+      payload.values
+    )
     .then(() => res.sendStatus(200))
     .catch((err) => {
       console.log(`[ERROR: /delconfig] ${err}`);

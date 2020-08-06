@@ -1,6 +1,7 @@
 const axios = require("axios");
 const https = require("https");
 const fs = require("fs");
+const superagent = require("superagent");
 
 /**
  * Gets all the Server Config sections object from the Rucio Server.
@@ -26,30 +27,30 @@ async function getAllConfig(certlocation, server, token) {
  * @param {{section: String, option: String, value: any}} payload
  */
 async function addConfig(certlocation, server, token, payload) {
-  const httpsAgent = new https.Agent({
-    ca: fs.readFileSync(certlocation),
-    rejectUnauthorized: false,
-  });
   const section = payload.section;
   const option = payload.option;
   const value = payload.value;
 
-  return axios
-    .put(`https://${server.host}/config/${section}/${option}/${value}`, {
-      httpsAgent,
-      headers: { "X-Rucio-Auth-Token": token },
-    })
-    .then((res) => {
+  return superagent
+    .put(`https://${server.host}/config/${section}/${option}/${value}`)
+    .set("X-Rucio-Auth-Token", token)
+    .ca(fs.readFileSync(certlocation))
+    .ok((res) => {
       console.log(`[INFO] Added ${section}.${option} on ${server.name}`);
-      console.log(res);
-    });
+      return res.status === 201;
+    })
+    .on("error", (res) =>
+      res.status === 401
+        ? console.log("[ERROR] Invalid Credentials")
+        : console.log("[ERROR] Internal Server Error")
+    );
 }
 
 /**
  *  Attempts to DELETE an `option` in a `section` on Rucio Server
- * @param {String} certlocation 
+ * @param {String} certlocation
  * @param {{name: String, host: String, auth: String}} server
- * @param {String} token 
+ * @param {String} token
  * @param {{section: String, option: String, value: any}} payload
  */
 async function delConfig(certlocation, server, token, payload) {
@@ -62,9 +63,8 @@ async function delConfig(certlocation, server, token, payload) {
       headers: { "X-Rucio-Auth-Token": token },
       httpsAgent,
     })
-    .then((res) => {
+    .then(() => {
       console.log(`[INFO] Deleted ${section}.${option} on ${server.name}`);
-      console.log(res.data);
     });
 }
 

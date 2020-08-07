@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { makeStyles, AccordionDetails } from "@material-ui/core";
 import PropTypes from "prop-types";
-import EditButtons from "./ServerConfigEdit";
+import EditButtons from "./ServerConfigEditButtons";
 import ServerConfigEditForm from "./ServerConfigEditForm";
 import ServerConfigTitle from "./ServerConfigTitle";
 import DialogNewSection from "./DialogNewSection";

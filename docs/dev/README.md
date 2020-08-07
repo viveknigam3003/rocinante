@@ -1,5 +1,5 @@
 # Rucio Desktop : Developer Documentation
-v0.1.1
+v0.1.2
 
 # Table of Contents
 
@@ -131,11 +131,13 @@ $ npm run electron
 
 ### Troubleshooting
 
-In case of an `code ELIFECYCLE` npm error, run the following script
+* In case of an `code ELIFECYCLE` npm error, run the following script
 
 ```BASH
 $ npm run reset-env
 ```
+
+* Use `ctrl + R` or `cmd + R` (on MacOS) to refresh/reset the app if app freezes or crashes.
 
 ## Support
 If you are looking for support, join us on our Slack [#support](https://rucio.slack.com/messages/#support) channel, or send an email to our public mailing list [rucio-users@googlegroups.com](mailto:rucio-users@googlegroups.com).

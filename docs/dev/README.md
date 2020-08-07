@@ -20,7 +20,7 @@ v0.1.1
 * [Extra Notes](#extra-notes)
 <!--te-->
 
-# Introduction
+## Introduction
 Welcome to Rucio Desktop's Developer Documentation!
 Rucio Desktop (codename: rocinante) is a GUI desktop client for Rucio - Exascale Scientific Data Management Framework. 
 It was built by [@viveknigam3003](https://github.com/viveknigam3003) and has been improved with the help of our open-source [contributors]().
@@ -31,7 +31,7 @@ We __highly recommend__ that before contributing to the project you must get you
 * [Rucio - Scientific data management (paper)](https://arxiv.org/abs/1902.09857)
 * [rucio/rucio](https://github.com/rucio/rucio)
 
-# Tech Stack
+## Tech Stack
 
 Before contributing to the project, you must be familiar with the tech stack used to build this project.
 
@@ -48,20 +48,20 @@ The version of React used at the time of development was v16.13.1.
 This means that the application uses features such as [Hooks](https://reactjs.org/docs/hooks-intro.html) and [Context](https://reactjs.org/docs/context.html).
 The app also avoids the usage of classes hence completely using the functional programming paradigm.
 
-# Contributing to the project
+## Contributing to the project
 
 To read about contribution guidelines refer to our [CONTRIBUTION GUIDE]()
 
-# Setting Up a Developement Environment
+## Setting Up a Developement Environment
 
 Setting up a development environment for Rocinante requires some prerequisites to use the app with it's complete functionality.
 You may skip the installation of the FUSE-POSIX interface if you don't wish to use the __Explore__ section of the application.
 
-## Installing FUSE-POSIX Interface
+### Installing FUSE-POSIX Interface
 
 Refer to the [FUSE-POSIX](https://github.com/rucio/fuse-posix#getting-started) installation guide for setting up RucioFS on your UNIX based machine.
 
-## Installing NodeJS
+### Installing NodeJS
 
 To run the application from source you will need NodeJS (LTS) installed on your system.
 Download the correct binary from the [NPM Official Website](https://nodejs.org/en/). After installing `node` on your system check the version using.
@@ -77,7 +77,7 @@ $ npm -v
 Make sure that the `node` version > 12.16 (LTS) or is equal to the current release.
 
 
-## Setting up the repository
+### Setting up the repository
 
 Fork the repository and then clone your private repository directly on your system.
 
@@ -88,7 +88,7 @@ $ git remote add upstream git@github.com:viveknigam3003/rocinante.git
 $ git fetch --all
 ```
 
-## Setup Scripts
+### Setup Scripts
 
 After setting up NodeJS and the repository, you will need to go inside the cloned repository to run the setup script. This will install all the dependencies and start the development server which will be available on __http://localhost:3005__
 
@@ -129,7 +129,7 @@ Open another terminal window and run:
 $ npm run electron
 ```
 
-## Troubleshooting
+### Troubleshooting
 
 In case of an `code ELIFECYCLE` npm error, run the following script
 

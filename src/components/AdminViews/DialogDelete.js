@@ -29,7 +29,7 @@ function DialogDelete(props) {
           <Button onClick={props.handleClose} color="secondary">
             Cancel
           </Button>
-          <Button onClick={props.handleClose} color="primary" autoFocus>
+          <Button onClick={props.handleDelete} color="primary" autoFocus>
             Yes
           </Button>
         </DialogActions>
@@ -44,6 +44,7 @@ DialogDelete.propTypes = {
   section: PropTypes.string,
   server: PropTypes.string,
   handleClose: PropTypes.func,
+  handleDelete: PropTypes.func
 };
 
 export default DialogDelete;

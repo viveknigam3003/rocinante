@@ -16,7 +16,7 @@ function EditButtons(props) {
           <IconButton className={classes.iconBtn} onClick={props.confirmEdit}>
             <DoneIcon fontSize="inherit" color="primary" />
           </IconButton>
-          <IconButton className={classes.iconBtn} onClick={props.confirmEdit}>
+          <IconButton className={classes.iconBtn} onClick={props.newOption}>
             <AddIcon fontSize="inherit" color="primary" />
           </IconButton>
           <IconButton className={classes.iconBtn} onClick={props.cancelEdit}>
@@ -46,7 +46,8 @@ EditButtons.propTypes = {
   editMode: PropTypes.bool,
   onClick: PropTypes.func,
   cancelEdit: PropTypes.func,
-  confirmEdit: PropTypes.func
+  confirmEdit: PropTypes.func,
+  newOption: PropTypes.func
 };
 
 export default EditButtons;

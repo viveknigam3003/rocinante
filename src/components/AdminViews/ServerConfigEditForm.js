@@ -19,7 +19,6 @@ function ServerConfigEditForm(props) {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {
-    // Process Delete Request.then(setOpen(false))
     setOpen(false);
   };
 
@@ -45,6 +44,7 @@ function ServerConfigEditForm(props) {
         section={props.section}
         server={props.server}
         handleClose={handleClose}
+        handleDelete={props.handleDelete}
       />
     </form>
   );
@@ -56,6 +56,7 @@ ServerConfigEditForm.propTypes = {
   onClick: PropTypes.func,
   server: PropTypes.string,
   section: PropTypes.string,
+  handleDelete: PropTypes.func
 };
 
 export default ServerConfigEditForm;

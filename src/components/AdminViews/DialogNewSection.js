@@ -35,6 +35,8 @@ function DialogNewSection(props) {
               label="Section"
               autoFocus
               required
+              disabled={props.section}
+              defaultValue={props.section}
               onChange={(e) => props.setSection(e.target.value)}
             />
             <TextField
@@ -55,8 +57,9 @@ function DialogNewSection(props) {
           </Button>
           <Button
             disabled={props.disabled}
-            onClick={props.handleSubmit}
+            onClick={() => props.handleSubmit()}
             color="primary"
+            variant="contained"
             autoFocus
           >
             Add

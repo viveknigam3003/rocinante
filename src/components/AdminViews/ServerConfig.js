@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 import EditButtons from "./ServerConfigEdit";
 import ServerConfigEditForm from "./ServerConfigEditForm";
 import ServerConfigTitle from "./ServerConfigTitle";
+import DialogNewSection from "./DialogNewSection";
+import { useDispatch } from "react-redux";
+import { addConfig, delConfig, getConfig } from "../Utils/Config";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,11 +45,66 @@ function ServerConfig(props) {
   const classes = useStyles();
   const config = props.config;
   const [editSection, setEditSection] = useState(null);
+  const [open, setOpen] = useState(false);
+  const [section, setSection] = useState("");
+  const [option, setOption] = useState("");
+  const [value, setValue] = useState();
+  const dispatch = useDispatch();
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const handleNewSectionDialog = (section) => {
+    setSection(section);
+    setOpen(true);
+  };
+
+  const fetchConfig = async () => {
+    getConfig(props.server)
+      .then((res) => {
+        if (res.status === 200) props.setConfig(res.data);
+      })
+      .catch((err) => console.log(err));
+  };
+
+  const handleOptionSubmit = () => {
+    addConfig(props.server, {
+      section: section,
+      option: option,
+      value: value,
+    })
+      .then((res) => props.setStatus(res.status))
+      .then(setOpen(false))
+      .then(setEditSection(null))
+      .then(async () => await fetchConfig())
+      .then(() => dispatch({ type: "SHOW_SNACKBAR" }));
+  };
+
+  function validateInput() {
+    return section.length > 0 && option.length > 0;
+  }
+
+  const handleDelete = (server, section, option) => {
+    delConfig(server, {
+      section: section,
+      option: option,
+    })
+      .then((res) => props.setStatus(res.status))
+      .then(setOpen(false))
+      .then(setEditSection(null))
+      .then(async () => await fetchConfig())
+      .then(() => dispatch({ type: "SHOW_SNACKBAR" }));
+  };
 
   return (
     <AccordionDetails>
       <div className={classes.root}>
-        <ServerConfigTitle server={props.server}/>
+        <ServerConfigTitle
+          server={props.server}
+          onSectionAdd={() => setEditSection(null)}
+          fetchConfig={fetchConfig}
+        />
         {Object.keys(config).map((section, index) => (
           <div key={section} className={classes.section}>
             <div className={classes.sectionTitle}>
@@ -56,6 +114,7 @@ function ServerConfig(props) {
                   editMode={true}
                   cancelEdit={() => setEditSection(null)}
                   confirmEdit={() => console.log("Saved")}
+                  newOption={() => handleNewSectionDialog(section)}
                 />
               ) : (
                 <EditButtons
@@ -72,6 +131,9 @@ function ServerConfig(props) {
                     option={option}
                     optionValue={config[section][option]}
                     server={props.server}
+                    handleDelete={() =>
+                      handleDelete(props.server, section, option)
+                    }
                   />
                 ) : (
                   <React.Fragment>
@@ -88,13 +150,24 @@ function ServerConfig(props) {
           </div>
         ))}
       </div>
+      <DialogNewSection
+        section={section}
+        setOption={setOption}
+        setValue={setValue}
+        disabled={!validateInput()}
+        open={open}
+        handleClose={handleClose}
+        handleSubmit={handleOptionSubmit}
+      />
     </AccordionDetails>
   );
 }
 
 ServerConfig.propTypes = {
   config: PropTypes.object,
+  setConfig: PropTypes.func,
   server: PropTypes.string,
+  setStatus: PropTypes.func,
 };
 
 export default ServerConfig;

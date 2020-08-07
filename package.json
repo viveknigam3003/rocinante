@@ -37,7 +37,10 @@
     "eject": "react-scripts eject",
     "electron": "electron .",
     "dev-server": "cd server && nodemon app.js",
-    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3005 && npm run dev-server\""
+    "dev": "concurrently \"npm start\" \"wait-on http://localhost:3005 && npm run dev-server\"",
+    "setup-dev": "npm install && npm run dev",
+    "prereset-env": "npm cache clean --force && rm -rf node_modules package-lock.json",
+    "reset-env": "npm run setup-dev"
   },
   "eslintConfig": {
     "extends": "react-app"

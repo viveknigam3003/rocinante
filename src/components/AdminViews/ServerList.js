@@ -10,6 +10,7 @@ import { green, red } from "@material-ui/core/colors";
 import SettingsIcon from "@material-ui/icons/Settings";
 import ServerConfig from "./ServerConfig";
 import { getConfig } from "../Utils/Config";
+import AlertSnackbar from "../Utils/Snackbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,7 @@ function ServerList() {
   const [expanded, setExpanded] = useState(false);
   const [details, showDetails] = useState(false);
   const [server, setServer] = useState("");
+  const [status, setStatus] = useState(0);
 
   const handleChange = (panel) => (event, isExpanded) => {
     event.preventDefault();
@@ -65,6 +67,37 @@ function ServerList() {
         })
         .catch((err) => console.log(err));
   }, [server]);
+
+  function handleAlertBar(status) {
+    switch (status) {
+      case 200:
+        return (
+          <AlertSnackbar
+            severity="success"
+            message={`Option Updated!`}
+            onExited={() => setStatus(0)}
+          />
+        );
+      case 401:
+        return (
+          <AlertSnackbar
+            severity="warning"
+            message={`Cannot Authenticate`}
+            onExited={() => setStatus(0)}
+          />
+        );
+      case 500:
+        return (
+          <AlertSnackbar
+            severity="error"
+            message={`Error updating value!`}
+            onExited={() => setStatus(0)}
+          />
+        );
+      default:
+        return <div />;
+    }
+  }
 
   return (
     <div id="server-list" className={classes.root}>
@@ -92,12 +125,18 @@ function ServerList() {
             </Typography>
           </AccordionSummary>
           {config !== undefined ? (
-            <ServerConfig config={config} server={item.server} />
+            <ServerConfig
+              config={config}
+              setConfig={setConfig}
+              server={item.server}
+              setStatus={setStatus}
+            />
           ) : (
             <Typography className={classes.listItem}>Loading...</Typography>
           )}
         </Accordion>
       ))}
+      {handleAlertBar(status)}
     </div>
   );
 }

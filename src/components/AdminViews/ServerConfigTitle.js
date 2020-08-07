@@ -4,7 +4,7 @@ import { makeStyles, IconButton } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import DialogNewSection from "./DialogNewSection";
 import { addConfig } from "../Utils/Config";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AlertSnackbar from "../Utils/Snackbar";
 
 const useStyles = makeStyles({
@@ -26,25 +26,23 @@ function ServerConfigTitle(props) {
   const [section, setSection] = useState("");
   const [option, setOption] = useState("");
   const [value, setValue] = useState();
-  const status = useSelector((state) => state.status);
+  const [status, setStatus] = useState(0);
   const dispatch = useDispatch();
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleSubmit = () => {
+  const handleNewSectionSubmit = () => {
     addConfig(props.server, {
       section: section,
       option: option,
       value: value,
     })
-      .then((res) =>
-        res.status === 200
-          ? dispatch({ type: "SUCCESS" })
-          : dispatch({ type: "SERVER_ERR" })
-      )
+      .then((res) => setStatus(res.status))
       .then(setOpen(false))
+      .then(props.onSectionAdd())
+      .then(async () => await props.fetchConfig())
       .then(() => dispatch({ type: "SHOW_SNACKBAR" }));
   };
 
@@ -52,35 +50,63 @@ function ServerConfigTitle(props) {
     return section.length > 0 && option.length > 0;
   }
 
+  function handleAlertBar(status) {
+    switch (status) {
+      case 200:
+        return (
+          <AlertSnackbar
+            severity="success"
+            message={`Section Added!`}
+            onExited={() => setStatus(0)}
+          />
+        );
+      case 401:
+        return (
+          <AlertSnackbar
+            severity="warning"
+            message={`Cannot Authenticate!`}
+            onExited={() => setStatus(0)}
+          />
+        );
+      case 500:
+        return (
+          <AlertSnackbar
+            severity="error"
+            message={`Error Adding Section!`}
+            onExited={() => setStatus(0)}
+          />
+        );
+      default:
+        return <div />;
+    }
+  }
+
   return (
-    <div id="title" className={classes.title}>
-      <span style={{ opacity: 0.5 }}>Config</span>
-      <IconButton onClick={() => setOpen(true)}>
-        <AddIcon fontSize="inherit" color="primary" />
-      </IconButton>
-      <DialogNewSection
-        setSection={setSection}
-        setOption={setOption}
-        setValue={setValue}
-        disabled={!validateInput()}
-        open={open}
-        handleClose={handleClose}
-        handleSubmit={handleSubmit}
-      />
-      {status === 200 ? (
-        <AlertSnackbar message="New Section Added!" severity="success" />
-      ) : (
-        <AlertSnackbar
-          message="Error occured while adding section"
-          severity="error"
+    <React.Fragment>
+      <div id="title" className={classes.title}>
+        <span style={{ opacity: 0.5 }}>Config</span>
+        <IconButton onClick={() => setOpen(true)}>
+          <AddIcon fontSize="inherit" color="primary" />
+        </IconButton>
+        <DialogNewSection
+          setSection={setSection}
+          setOption={setOption}
+          setValue={setValue}
+          disabled={!validateInput()}
+          open={open}
+          handleClose={handleClose}
+          handleSubmit={handleNewSectionSubmit}
         />
-      )}
-    </div>
+      </div>
+      {handleAlertBar(status)}
+    </React.Fragment>
   );
 }
 
 ServerConfigTitle.propTypes = {
   server: PropTypes.string,
+  onSectionAdd: PropTypes.func,
+  fetchConfig: PropTypes.func
 };
 
 export default ServerConfigTitle;

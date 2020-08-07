@@ -6,8 +6,6 @@
 
 * [Introduction](#introduction)
 * [Tech Stack](#tech-stack)
-    * [Frontend](#frontend)
-    * [API Server (client back-end)](#api-server)
 * [Contributing to the project](#contributing-to-the-project)
 * [Setting Up a Developement Environment](#setting-up-a-development-environment)
     * [Installing FUSE-POSIX Interface](#installing-fuse-posix-interface)
@@ -41,10 +39,8 @@ Before contributing to the project, you must be familiar with the tech stack use
 * Redux
 * ExpressJS
 * Electron (^9.1)
-* Axios and Superagent
 
-
-## Frontend - React JS v16.13
+### Note on React JS v16.13
 
 Rocinante is build with ReactJS.
 The version of React used at the time of development was v16.13.1.

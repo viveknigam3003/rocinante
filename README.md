@@ -34,6 +34,12 @@ The app will authenticate all the added accounts automatically.
 
 For Detailed Instructions refer to our Usage Guide [here](https://github.com/viveknigam3003/rocinante/blob/master/docs/README.md).
 
+## Documentation
+
+* [User Documentation](https://github.com/viveknigam3003/rocinante/tree/master/docs) - includes client setup and usage guide.
+
+* [Developer Documentation](https://github.com/viveknigam3003/rocinante/tree/master/docs/dev) - Includes instructions for setting up dev environment, Component and API references.
+
 ## Getting Started with Development
 
 Fork the repository or clone it directly to run on your system.

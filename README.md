@@ -1,3 +1,4 @@
+__NOTE: This repository is no longer maintained and code has been shifted to [rucio/desktop](https://github.com/rucio/desktop)__
 # rocinante
 ![GitHub package.json version](https://img.shields.io/github/package-json/v/viveknigam3003/rocinante?style=flat-square)
 ![GitHub package.json dependency version (prod)](https://img.shields.io/github/package-json/dependency-version/viveknigam3003/rocinante/react?style=flat-square)
